@@ -1,0 +1,74 @@
+.file-explorer-home-container {
+    height: 100vh;
+    width: 1440px;
+    background-color: white;
+    display: flex;
+    flex-direction: row;
+    
+}
+
+.sidebar {
+    height: 100vh;
+    width: 380px;
+    background-color: #E5E5E5;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 30px;
+}
+
+.app-logo {
+    position: absolute;
+    width: 160px;
+    height: 40px;
+    left: 50px;
+    top: 50.36px;
+}
+
+.add-buttons-wrapper {
+
+}
+
+.add-file {
+
+}
+
+.add-folder {
+
+}
+
+.folder-section {
+
+
+}
+
+.folder-box {
+
+}
+
+.lock-button-wrapper {
+
+}
+.right-container {
+    height: 100vh;
+    width: 1060px;
+    display: flex;
+    flex-direction: column;
+    padding: 30px;
+}
+
+.app-options-bar {
+
+}
+
+.search-bar {
+
+}
+
+.settings-button {
+
+}
+
+.logout-button {
+
+}
