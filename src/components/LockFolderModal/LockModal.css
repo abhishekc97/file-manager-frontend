@@ -1,0 +1,61 @@
+.modal {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    
+    width: 399.83px;
+    height: 305.56px;
+    left: 520px;
+    top: 297px;
+    border-radius: 10px;
+    border: none;
+    background: white;
+    
+}
+
+.pin-heading {
+    display: flex;
+    justify-content: center;
+
+    width: 167px;
+    height: 28px;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 28px;
+    letter-spacing: -0.02em;
+
+    color: #1e272e;
+    align-self: center;
+}
+
+.enter-pin-button {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+
+    padding: 8px 16px;
+    gap: 8px;
+    margin-top: 100px;
+    width: 160px;
+    height: 44px;
+
+    color: #FFF;
+    background: #142683;
+    border-radius: 5px;
+}
+
+.modal-contents {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    height: 220px;
+    width: 350px;
+    border: none;
+    margin: auto;
+    padding: 15px;
+    
+}

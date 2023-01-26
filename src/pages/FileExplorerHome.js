@@ -37,10 +37,10 @@ function FileExplorerHome() {
                     <span className="lock-now-icon"></span>
                     Lock Now
                 </button>
-                { showLockModal && createPortal(
-                    <LockModal onClose={ () => setShowLockModal(false)} />,
-                    document.body
-                )}
+                { showLockModal && 
+                    <LockModal show={showLockModal} onClose={ () => setShowLockModal(false)} />
+                    
+                }
             </div>
             <div className="right-container">
                 <div className="app-options-bar">
@@ -56,12 +56,12 @@ function FileExplorerHome() {
                     </button>
                     {
                         showSetPinModal && createPortal(
-                            <SetPinModal onClose={ () => setShowSetPinModal(false) } />, 
+                            <SetPinModal show={showSetPinModal} onClose={ () => setShowSetPinModal(false) } />, 
                             document.body
                         )
                     }
                     <button className="logout-button">
-                        <span className="logout-icon">.</span>
+                        <span className="logout-icon"></span>
                     </button>
                     foldername/filename
                 </div>

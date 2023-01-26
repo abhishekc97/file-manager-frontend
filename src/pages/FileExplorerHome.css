@@ -10,11 +10,12 @@
 .sidebar {
     height: 100vh;
     width: 380px;
-    background-color: #E5E5E5;
+    background-color: #e5e5e5;
     display: flex;
     flex-direction: column;
     align-items: center;
     padding: 30px;
+    justify-content: center;
 }
 
 .app-logo {
@@ -27,22 +28,26 @@
 }
 
 .add-buttons-wrapper {
-    display: flex;
     flex-direction: row;
+    top: 17%;
+    position: absolute;
+
+    /* border: 1px solid black; */
+    height: 60px;
+    width: 360px;
+    display: flex;
+    justify-content: space-evenly;
 }
 
 .addfile-btn-wrapper {
     display: flex;
     flex-direction: row;
-
 }
-
 
 .add-file-icon {
     background: url("../../public/images/add-file.png") no-repeat;
     height: 22px;
     width: 19px;
-
 }
 
 .add-file {
@@ -54,19 +59,19 @@
     align-items: center;
     padding: 10px;
     gap: 10px;
-    
-    position: absolute;
+
+    /* position: absolute;
     left: 3.47%;
     right: 88.68%;
     top: 17%;
-    bottom: 78.56%;
+    bottom: 78.56%; */
 
     height: 40px;
     width: 113px;
-    
+
     /* background: url("../../public/images/add-file.png") no-repeat; */
 
-    border: 1px solid #445EE2;
+    border: 1px solid #445ee2;
     border-radius: 5px;
 
     cursor: pointer;
@@ -76,7 +81,6 @@
     background: url("../../public/images/addfolder.png") no-repeat;
     height: 21px;
     width: 23px;
-
 }
 .add-folder {
     box-sizing: border-box;
@@ -87,55 +91,52 @@
     align-items: center;
     padding: 10px;
     gap: 10px;
-    
-    position: absolute;
+
+    /* position: absolute;
     left: 13.33%;
     right: 77.01%;
     top: 17%;
-    bottom: 78.67%;
-
+    bottom: 78.67%; */
 
     height: 40px;
     width: 139px;
-    
-    border: 1px solid #445EE2;
+
+    border: 1px solid #445ee2;
     border-radius: 5px;
     cursor: pointer;
 }
 
-
 .folder-section {
-
-
 }
 
 .folder-box {
-
 }
 
 .lock-now-icon {
     background: url("../../public/images/lock.png") no-repeat;
     height: 22px;
     width: 22px;
+    background-position-x: center;
+    background-position-y: center;
 }
 
 .lock-button-wrapper {
-
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
     padding: 8px 16px;
     gap: 18px;
-    
+
     position: absolute;
     width: 281px;
     height: 44px;
     left: 50px;
     top: 806px;
-    
-    background: #445EE2;
+
+    background: #445ee2;
     border-radius: 5px;
+    border: none;
 
     color: white;
     cursor: pointer;
@@ -151,11 +152,9 @@
 }
 
 .app-options-bar {
-
 }
 
 .search-bar {
-
 }
 
 .settings-button {
@@ -165,7 +164,7 @@
     left: 1298px;
     top: 49px;
     background-color: white;
-    border: solid 1px #EBF0F5;
+    border: solid 1px #ebf0f5;
     border-radius: 5px;
     cursor: pointer;
 
@@ -175,7 +174,7 @@
 }
 
 .settings-icon {
-    background: url("../../public/images/setting.png") no-repeat; 
+    background: url("../../public/images/setting.png") no-repeat;
     height: 24px;
     width: 24px;
 }
@@ -187,10 +186,10 @@
     left: 1364px;
     top: 49px;
     background-color: white;
-    border: solid 1px #EBF0F5;
+    border: solid 1px #ebf0f5;
     border-radius: 5px;
     cursor: pointer;
-    
+
     display: flex;
     justify-content: center;
     align-items: center;
@@ -200,4 +199,13 @@
     background: url("../../public/images/log-out.png") no-repeat;
     height: 20px;
     width: 16px;
+}
+
+hr {
+    top: 193px;
+    position: absolute;
+    height: 1px;
+    width: 959px;
+    left: 431px;
+    background: #ebf0f5;
 }
