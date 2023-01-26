@@ -1,13 +1,75 @@
 import React from "react";
-import "./FileExplorerHome.css"
+import { useState } from "react";
+import { createPortal } from 'react-dom';
+import LockModal from "../components/LockFolderModal/LockModal.js";
+import SetPinModal from "../components/SetPinModal/SetPinModal.js";
 
+import "./FileExplorerHome.css";
 
 function FileExplorerHome() {
-    return ( 
+    const [showLockModal, setShowLockModal] = useState(false);
+    const [showSetPinModal, setShowSetPinModal] = useState(false);
+
+    const [showCreateFileModal, setShowCreateFileModal] = useState(false);
+    const [showCreateFolderModal, setShowCreateFolderModal] = useState(false);
+    const [showEditFileModal, setShowEditFileModal] = useState(false);
+
+    return (
         <div className="file-explorer-home-container">
-            
+            <div className="sidebar">
+                <div className="app-logo">Logo</div>
+                <div className="add-buttons-wrapper">
+                    <button className="add-file">
+                        <span className="add-file-icon"></span>
+                        Add File
+                    </button>
+                    <button className="add-folder">
+                        <span className="add-folder-icon"></span>
+                        Add Folder
+                    </button>
+                </div>
+                <div className="folder-section">
+                    folder selection divs
+                    <div className="folder-box">folder name 1</div>
+                    <div className="folder-box">folder name 2</div>
+                </div>
+                <button className="lock-button-wrapper" onClick={() => setShowLockModal(true)}>
+                    <span className="lock-now-icon"></span>
+                    Lock Now
+                </button>
+                { showLockModal && createPortal(
+                    <LockModal onClose={ () => setShowLockModal(false)} />,
+                    document.body
+                )}
+            </div>
+            <div className="right-container">
+                <div className="app-options-bar">
+                    <div className="search-bar">
+                        <input
+                            className="search-box"
+                            type="text"
+                            placeholder="search bar"
+                        />
+                    </div>
+                    <button className="settings-button" onClick={() => setShowSetPinModal(true)} >
+                        <span className="settings-icon"></span>
+                    </button>
+                    {
+                        showSetPinModal && createPortal(
+                            <SetPinModal onClose={ () => setShowSetPinModal(false) } />, 
+                            document.body
+                        )
+                    }
+                    <button className="logout-button">
+                        <span className="logout-icon">.</span>
+                    </button>
+                    foldername/filename
+                </div>
+                <hr />
+                horizontal rule folder contents
+            </div>
         </div>
-     );
+    );
 }
 
 export default FileExplorerHome;
