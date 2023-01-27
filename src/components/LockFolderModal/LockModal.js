@@ -3,9 +3,9 @@ import "./LockModal.css";
 import Modal from "react-bootstrap/Modal";
 
 function LockModal({ show, onClose }) {
-    const showHideClassName = show
-        ? "modal display-block"
-        : "modal display-none";
+    // const showHideClassName = show
+    //     ? "modal display-block"
+    //     : "modal display-none";
 
     return (
         <Modal

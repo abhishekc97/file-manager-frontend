@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useState } from "react";
 import { createPortal } from 'react-dom';
 import LockModal from "../components/LockFolderModal/LockModal.js";
 import SetPinModal from "../components/SetPinModal/SetPinModal.js";
+
+import { getStatus, createPin, verifyPin } from "../api/PinVerification.js";
 
 import "./FileExplorerHome.css";
 
@@ -13,6 +15,50 @@ function FileExplorerHome() {
     const [showCreateFileModal, setShowCreateFileModal] = useState(false);
     const [showCreateFolderModal, setShowCreateFolderModal] = useState(false);
     const [showEditFileModal, setShowEditFileModal] = useState(false);
+
+    
+
+    async function findPinStatus() {
+        const response = await getStatus();
+        
+        if(!response) {
+            console.log("no response");
+            setShowSetPinModal(true);
+        } else {
+            console.log(response.data);
+            localStorage.setItem("Pin_exists", "true");
+        }
+    }
+
+    useEffect(() => {
+        findPinStatus();
+    }, []);
+    
+    // async function createNewPin() {
+    //     const response = await createPin("5588");
+    //     if(!response) {
+    //         console.log("no response");
+    //     } else {
+    //         console.log(response);
+    //     }
+    // }
+
+    // useEffect(() => {
+    //     createNewPin();
+    // }, []);
+
+    async function verifyGivenPin() {
+        const response = await verifyPin("1234");
+        if(!response) {
+            console.log("no response");
+        } else {
+            console.log(response);
+        }
+    }
+    // useEffect(() => {
+    //     verifyGivenPin();
+    // }, []);
+
 
     return (
         <div className="file-explorer-home-container">
