@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { createPortal } from "react-dom";
 import LockModal from "../components/LockFolderModal/LockModal.js";
 import SetPinModal from "../components/SetPinModal/SetPinModal.js";
-import AddFileModal from "../components/AddFileModal/AddFileModal.js"
+import AddFileModal from "../components/AddFileModal/AddFileModal.js";
 import AddFolderModal from "../components/AddFolderModal/AddFolderModal.js";
 import { getStatus } from "../api/PinVerification.js";
 import { getFiles, getAllFolders } from "../api/FileOperations";
@@ -19,14 +19,17 @@ function FileExplorerHome() {
     const [showEditFileModal, setShowEditFileModal] = useState(false);
 
     const [filesList, setFilesList] = useState([]);
-    
 
     useEffect(() => {
         let lockIsOpen = localStorage.getItem("Lock_Is_On");
-        if (lockIsOpen) {
+
+        console.log(lockIsOpen);
+        if (lockIsOpen === "true") {
             setShowLockModal(true);
-        } else {
+            // console.log(typeof lockIsOpen);
+        } else if(lockIsOpen === "false") {
             setShowLockModal(false);
+            // console.log(typeof lockIsOpen);
         }
     }, []);
 
@@ -46,8 +49,6 @@ function FileExplorerHome() {
     useEffect(() => {
         findPinStatus();
     }, []);
-
-    
 
     async function getAllFiles() {
         let currentFolder = "folder1";
