@@ -1,4 +1,4 @@
-.modal {
+.setpin-modal {
     position: absolute;
     display: flex;
     flex-direction: column;
@@ -6,7 +6,7 @@
     align-items: center;
     
     width: 399.83px;
-    height: 305.56px;
+    height: 416px;
     left: 520px;
     top: 297px;
     border-radius: 10px;
