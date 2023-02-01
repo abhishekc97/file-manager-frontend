@@ -152,6 +152,7 @@
 }
 
 .app-options-bar {
+    padding: 25px;
 }
 
 .search-bar {
@@ -208,4 +209,14 @@ hr {
     width: 959px;
     left: 431px;
     background: #ebf0f5;
+}
+
+.file-section-container {
+    position: absolute;
+    top: 230px;
+    height: 550px;
+    width: 930px;
+    border: 1px solid #e5e5e5;
+    padding: 10px;
+    margin: 20px;
 }

@@ -7,7 +7,7 @@ export async function getStatus() {
         const response = await axios.get(reqUrl);
 
         if (response) {
-            console.log(response);
+            // console.log(response);
             return response;
         }
     } catch (error) {

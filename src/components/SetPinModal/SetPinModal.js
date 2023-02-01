@@ -6,16 +6,12 @@ import { createPin, updateExistingPin } from "../../api/PinVerification.js";
 import "./SetPinModal.css";
 
 function SetPinModal({ show, onClose }) {
-    // const input = useRef();
     const [pin, setPin] = useState("");
     const [error, setError] = useState(false);
 
     const [pinExists, setPinExists] = useState(false);
 
     function createNewPin() {
-        // let pin = input.value;
-        // if(!pin) setError(true);
-        // console.log(pin);
         if (pin === "") {
             setError(true);
         } else if (pinExists) {
@@ -57,6 +53,16 @@ function SetPinModal({ show, onClose }) {
         setPinExists(false);
     }, []);
 
+    const [passwordShown1, setPasswordShown1] = useState(false);
+    const togglePassword1 = () => {
+        setPasswordShown1(!passwordShown1);
+    };
+    
+    const [passwordShown2, setPasswordShown2] = useState(false);
+    const togglePassword2 = () => {
+        setPasswordShown2(!passwordShown2);
+    };
+
     return (
         <Modal
             show={show}
@@ -70,17 +76,36 @@ function SetPinModal({ show, onClose }) {
                 <label htmlFor="">Enter new pin</label>
                 <br />
                 <input
-                    type="password"
+                    type={passwordShown1 ? "text" : "password"}
                     name="pin"
                     maxLength={4}
                     onChange={(e) => {
                         setPin(e.target.value);
                     }}
                 ></input>
+                <i
+                    className={
+                        passwordShown1 ? "far fa-eye" : "far fa-eye-slash"
+                    }
+                    id="togglePassword"
+                    onClick={togglePassword1}
+                ></i>
                 <br />
                 <label htmlFor="">Confirm new pin</label>
                 <br />
-                <input type="password" name="confirm pin" maxLength={4}></input>
+                <input
+                    type={passwordShown2 ? "text" : "password"}
+                    name="confirm pin"
+                    id="password"
+                    maxLength={4}
+                ></input>
+                <i
+                    className={
+                        passwordShown2 ? "far fa-eye" : "far fa-eye-slash"
+                    }
+                    id="togglePassword"
+                    onClick={togglePassword2}
+                ></i>
                 {error && (
                     <label style={{ color: "red" }}>
                         Error while setting a pin

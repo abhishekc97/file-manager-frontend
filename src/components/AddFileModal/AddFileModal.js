@@ -1,30 +1,38 @@
 import React, { useEffect, useState } from "react";
 import Modal from "react-bootstrap/Modal";
-import { createNewFolder } from "../../api/FileOperations";
+import { useParams } from "react-router-dom";
+import { createNewFile } from "../../api/FileOperations";
 import { useNavigate } from "react-router-dom";
 
-import "./AddFolderModal.css";
+import "./AddFileModal.css";
 
-function AddFolderModal({ show, onClose }) {
+function AddFileModal({ show, onClose, fileAdded }) {
     const navigate = useNavigate();
 
-    const [folderName, setFolderName] = useState("");
+    const [fileName, setFileName] = useState("");
     const [error, setError] = useState(false);
 
-    function createFolder() {
+    // useparams for getting current folder
+    let { folderName } = useParams();
+    console.log(folderName);
+
+    function createFile() {
         if (folderName === "") {
             setError(true);
         } else {
-            createNewFolder(folderName)
+            // let folderNametemp = "folder 3"
+            createNewFile(fileName, folderName)
                 .then((response) => {
                     console.log(response);
-                    console.log("New Folder made");
+                    console.log("New File made");
                     navigate(`/${folderName}`);
                 })
                 .catch((err) => {
                     console.log(err);
                 });
             onClose();
+            localStorage.setItem("File_Added", true);
+            // fileAdded += 1;
         }
     }
 
@@ -33,24 +41,24 @@ function AddFolderModal({ show, onClose }) {
             show={show}
             onHide={onClose}
             keyboard={false}
-            className="addfolder-modal"
+            className="addfile-modal"
         >
             <div className="modal-contents">
-                <div className="folder-heading">Create Folder</div>
-                <label htmlFor="">Enter folder name</label>
+                <div className="file-heading">Create File</div>
+                <label htmlFor="">Enter file name</label>
                 <input
                     type="text"
-                    name="foldername"
+                    name="filename"
                     onChange={(e) => {
-                        setFolderName(e.target.value);
+                        setFileName(e.target.value);
                     }}
                 ></input>
                 {error && (
                     <label style={{ color: "red" }}>
-                        Please enter a folder name
+                        Please enter a file name
                     </label>
                 )}
-                <button onClick={createFolder} className="create-folder-button">
+                <button onClick={createFile} className="create-file-button">
                     Create now
                 </button>
             </div>
@@ -58,4 +66,4 @@ function AddFolderModal({ show, onClose }) {
     );
 }
 
-export default AddFolderModal;
+export default AddFileModal;

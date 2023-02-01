@@ -16,18 +16,19 @@ function FileExplorerHome() {
 
     const [showCreateFileModal, setShowCreateFileModal] = useState(false);
     const [showCreateFolderModal, setShowCreateFolderModal] = useState(false);
-    const [showEditFileModal, setShowEditFileModal] = useState(false);
 
     const [filesList, setFilesList] = useState([]);
+
+    // console.log(showCreateFileModal, showCreateFolderModal, showEditFileModal);
 
     useEffect(() => {
         let lockIsOpen = localStorage.getItem("Lock_Is_On");
 
-        console.log(lockIsOpen);
+        // console.log(lockIsOpen);
         if (lockIsOpen === "true") {
             setShowLockModal(true);
             // console.log(typeof lockIsOpen);
-        } else if(lockIsOpen === "false") {
+        } else if (lockIsOpen === "false") {
             setShowLockModal(false);
             // console.log(typeof lockIsOpen);
         }
@@ -37,12 +38,12 @@ function FileExplorerHome() {
         const response = await getStatus();
 
         if (!response) {
-            console.log("no response");
+            // console.log("no response");
             setShowSetPinModal(true);
-            localStorage.setItem("Pin_exists", false);
+            localStorage.setItem("Pin_exists", "false");
         } else {
-            console.log(response.data);
-            localStorage.setItem("Pin_exists", true);
+            // console.log(response.data);
+            localStorage.setItem("Pin_exists", "true");
         }
     }
 
@@ -55,6 +56,22 @@ function FileExplorerHome() {
         const results = await getFiles(currentFolder);
         setFilesList(results);
     }
+
+    const [refreshNewFiles, setRefreshNewFiles] = useState(false);
+
+    async function findRefreshStatus() {
+        let fileAdded = localStorage.getItem("File_Added");
+
+        if (fileAdded === "true") {
+            setRefreshNewFiles(true);
+        } else if (fileAdded === "true") {
+            setRefreshNewFiles(false);
+        }
+    }
+
+    useEffect(() => {
+        findRefreshStatus();
+    }, []);
 
     return (
         <div className="file-explorer-home-container">
@@ -136,9 +153,8 @@ function FileExplorerHome() {
                     foldername/filename
                 </div>
                 <hr />
-                horizontal rule folder contents
                 <div className="file-section-container">
-                    <File />
+                    <File refreshNewFiles={refreshNewFiles} />
                 </div>
             </div>
         </div>

@@ -43,6 +43,7 @@ export async function getAllFolders() {
 export async function createNewFile(name, folder) {
     try {
         const reqUrl = `${process.env.REACT_APP_BACKEND_URL}/api/operations/newFile`;
+        console.log(name, folder);
         const response = await axios.post(reqUrl, {
             name: name,
             folder: folder,
@@ -80,11 +81,26 @@ export async function editFileContents(id, contents) {
 // GET Request
 export async function getFiles(folder) {
     try {
-        const reqUrl = `${process.env.REACT_APP_BACKEND_URL}/api/operations/${folder}`;
+        const reqUrl = `${process.env.REACT_APP_BACKEND_URL}/api/operations/getFiles/${folder}`;
         const response = await axios.get(reqUrl);
 
         if (response) {
-            // console.log(response);
+            console.log(response);
+            return response;
+        }
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+// get a particular file using its id
+export async function getFile(id) {
+    try {
+        const reqUrl = `${process.env.REACT_APP_BACKEND_URL}/api/operations/getFile/${id}`;
+        const response = await axios.get(reqUrl);
+
+        if (response) {
+            console.log(response);
             return response;
         }
     } catch (error) {

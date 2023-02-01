@@ -1,0 +1,50 @@
+.file-container {
+    display: grid;
+    flex-direction: row;
+    align-items: center;
+    grid-template-columns: repeat(7,1fr);
+    grid-gap: 10px;
+}
+
+.file-box {
+    display: flex;
+    flex-direction: column;
+    height: 130px;
+    width: 75px;
+    padding: 3px;
+    margin: 10px 20px;
+}
+
+.file-button {
+    height: 96px;
+    width: 70px;
+    border: none;
+    background-color: white;
+}
+
+.file-icon {
+    height: 96px;
+    width: 70px;
+    display: block;
+    
+    background: url("../../../public/images/regular-file.png") no-repeat;
+    background-size: 100%;
+    background-position: center; /* center the image within the button */
+    background-blend-mode: lighten;
+    background-repeat: no-repeat;
+
+    background-position-x: center;
+    background-position-y: center;
+}
+
+.file-name {
+    height: 30px;
+    width: 70px;
+    align-items: center;
+
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 28px;
+    letter-spacing: -0.02em;
+    color: #1e272e;
+}

@@ -16,7 +16,7 @@ function Folder() {
     async function getFolders() {
         const results = await getAllFolders();
         setFoldersList(results.data);
-        console.log(results);
+
         if (results) {
             if (!folderName) {
                 const defaultFolder = foldersList[0];
