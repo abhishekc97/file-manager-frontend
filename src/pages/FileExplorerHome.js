@@ -1,14 +1,19 @@
 import React, { useEffect, useState } from "react";
 import { createPortal } from "react-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import LockModal from "../components/LockFolderModal/LockModal.js";
 import SetPinModal from "../components/SetPinModal/SetPinModal.js";
 import AddFileModal from "../components/AddFileModal/AddFileModal.js";
 import AddFolderModal from "../components/AddFolderModal/AddFolderModal.js";
 import { getStatus } from "../api/PinVerification.js";
-import { getFiles, getAllFolders } from "../api/FileOperations";
+import {
+    getFiles,
+    getAllFolders,
+    getAllFilesFromCollection,
+} from "../api/FileOperations";
 import "./FileExplorerHome.css";
-import File from "../components/Files/File.js";
-import Folder from "../components/Folders/Folder.js";
+import Files from "../components/Files/Files.js";
+import Folders from "../components/Folders/Folders.js";
 
 function FileExplorerHome() {
     const [showLockModal, setShowLockModal] = useState(false);
@@ -17,7 +22,7 @@ function FileExplorerHome() {
     const [showCreateFileModal, setShowCreateFileModal] = useState(false);
     const [showCreateFolderModal, setShowCreateFolderModal] = useState(false);
 
-    const [filesList, setFilesList] = useState([]);
+    // const [searchText, setSearchText] = useState("");
 
     // console.log(showCreateFileModal, showCreateFolderModal, showEditFileModal);
 
@@ -51,27 +56,89 @@ function FileExplorerHome() {
         findPinStatus();
     }, []);
 
+    // async function getAllFiles() {
+    //     let currentFolder = "folder1";
+    //     const results = await getFiles(currentFolder);
+    //     setFilesList(results);
+    // }
+
+    // const [refreshNewFiles, setRefreshNewFiles] = useState(false);
+
+    // async function findRefreshStatus() {
+    //     let fileAdded = localStorage.getItem("File_Added");
+
+    //     if (fileAdded === "true") {
+    //         setRefreshNewFiles(true);
+    //     } else if (fileAdded === "true") {
+    //         setRefreshNewFiles(false);
+    //     }
+    // }
+
+    // useEffect(() => {
+    //     findRefreshStatus();
+    // }, []);
+
+    /** List all files */
+    const navigate = useNavigate();
+    // useparams for getting current folder
+    let { folderName } = useParams();
+
+    const [filesList, setFilesList] = useState([
+        { name: "" },
+        { name: "file 2" },
+    ]);
+
     async function getAllFiles() {
-        let currentFolder = "folder1";
-        const results = await getFiles(currentFolder);
-        setFilesList(results);
-    }
+        console.log(folderName);
+        const results = await getFiles(folderName);
+        console.log(results);
+        setFilesList(results.data);
 
-    const [refreshNewFiles, setRefreshNewFiles] = useState(false);
-
-    async function findRefreshStatus() {
-        let fileAdded = localStorage.getItem("File_Added");
-
-        if (fileAdded === "true") {
-            setRefreshNewFiles(true);
-        } else if (fileAdded === "true") {
-            setRefreshNewFiles(false);
+        if (results) {
+            if (!folderName) {
+                const defaultFile = filesList[0];
+                const defaultFileName = defaultFile.name;
+                console.log(defaultFileName);
+                navigate(`/${folderName}`); // navigate(`/${folderName}/:${defaultFileName}`);
+            }
         }
     }
-
     useEffect(() => {
-        findRefreshStatus();
+        getAllFiles();
+        console.log(filesList);
+    }, [folderName]);
+
+    /** Search functions */
+    const [value, setValue] = useState("");
+
+    const [files, setFiles] = useState([]);
+
+    const [dropdownIsActive, setActive] = useState("false");
+    const toggleClass = () => {
+      setActive(!dropdownIsActive); 
+     };
+
+    async function fetchAllFiles() {
+        const results = await getAllFilesFromCollection();
+        setFiles(results);
+        console.log(results);
+    }
+    useEffect(() => {
+        fetchAllFiles();
     }, []);
+
+    const onChange = (event) => {
+        toggleClass();
+        setValue(event.target.value);
+    };
+
+    const onSearch = (searchTerm) => {
+        setValue(searchTerm);
+        // our api to fetch the search result
+        console.log("search ", searchTerm);
+        toggleClass();
+
+    };
 
     return (
         <div className="file-explorer-home-container">
@@ -108,7 +175,7 @@ function FileExplorerHome() {
                     )}
                 </div>
                 <div className="folder-section-container">
-                    <Folder />
+                    <Folders />
                 </div>
                 <button
                     className="lock-button-wrapper"
@@ -126,13 +193,52 @@ function FileExplorerHome() {
             </div>
             <div className="right-container">
                 <div className="app-options-bar">
-                    <div className="search-bar">
+                    <div className="search-container">
+                        <div className="search-inner">
+                            <button className="search-icon" onClick={() => onSearch(value)}></button>
+                            <input
+                                type="text"
+                                value={value}
+                                onChange={onChange}
+                                className="search-input-box"
+                            />
+                        </div>
+                        <div className={dropdownIsActive ?"dropdown" : "dropdown-empty"}>
+                            {files
+                                .filter((file) => {
+                                    const searchTerm =
+                                        typeof value === "string"
+                                            ? value.toLocaleLowerCase()
+                                            : "";
+                                    const name =
+                                        typeof file.name === "string"
+                                            ? file.name.toLocaleLowerCase()
+                                            : "";
+                                    return (searchTerm &&
+                                        typeof name === "string"
+                                        ? name.startsWith(searchTerm)
+                                        : "" && name !== searchTerm);
+                                })
+                                .slice(0, 5)
+                                .map((file) => (
+                                    <div
+                                        onClick={() => onSearch(file.name)}
+                                        className="dropdown-row"
+                                        key={file._id}
+                                    ><div className="dropdown-row-icon"></div>
+                                        {file.name}
+                                    </div>
+                                ))}
+                        </div>
+                    </div>
+
+                    {/* <div className="search-bar">
                         <input
                             className="search-box"
                             type="text"
                             placeholder="search bar"
                         />
-                    </div>
+                    </div> */}
                     <button
                         className="settings-button"
                         onClick={() => setShowSetPinModal(true)}
@@ -150,11 +256,10 @@ function FileExplorerHome() {
                     <button className="logout-button">
                         <span className="logout-icon"></span>
                     </button>
-                    foldername/filename
                 </div>
                 <hr />
                 <div className="file-section-container">
-                    <File refreshNewFiles={refreshNewFiles} />
+                    <Files filesList={filesList} />
                 </div>
             </div>
         </div>

@@ -107,3 +107,17 @@ export async function getFile(id) {
         console.log(error);
     }
 }
+
+export async function getAllFilesFromCollection() {
+    try {
+        const reqUrl = `${process.env.REACT_APP_BACKEND_URL}/api/operations/getAllFiles`;
+        const response = await axios.get(reqUrl);
+        if (response) {
+            console.log(response);
+            return response.data;
+        }
+    } catch (error) {
+        console.log(error);
+        
+    }
+}

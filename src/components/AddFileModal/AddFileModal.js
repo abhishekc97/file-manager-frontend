@@ -31,10 +31,14 @@ function AddFileModal({ show, onClose, fileAdded }) {
                     console.log(err);
                 });
             onClose();
-            localStorage.setItem("File_Added", true);
+            localStorage.setItem("File_Added", "true");
             // fileAdded += 1;
         }
     }
+
+    useEffect(() => {
+
+    })
 
     return (
         <Modal

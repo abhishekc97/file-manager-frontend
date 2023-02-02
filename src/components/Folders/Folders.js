@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { getAllFolders } from "../../api/FileOperations.js";
-import "./Folder.css";
+import "./Folders.css";
 
 function Folder() {
     const navigate = useNavigate();
@@ -9,8 +9,8 @@ function Folder() {
     let { folderName } = useParams();
 
     const [foldersList, setFoldersList] = useState([
-        { "name": "folder name 1" },
-        { "name": "folder name 2" },
+        { name: "folder name 1" },
+        { name: "folder name 2" },
     ]);
 
     async function getFolders() {
@@ -38,21 +38,16 @@ function Folder() {
         <div className="folders-container">
             <>
                 {foldersList.map((folder, index) => (
-                    // <div className="folder-box" key={index} onClick={() => {navigateToFolder(folder.name)}} >
-                    //     {folder.name}
-                    // </div>
-                    // <div key={index}>
-                        <button
-                            className="folder-box"
-                            key={index}
-                            onClick={() => {
-                                navigateToFolder(folder.name);
-                            }}
-                        >
-                            <span className="folder-icon"></span>
-                            <span className="folder-name"> {folder.name} </span>
-                        </button>
-                    // </div>
+                    <button
+                        className="folder-box"
+                        key={index}
+                        onClick={() => {
+                            navigateToFolder(folder.name);
+                        }}
+                    >
+                        <span className="folder-icon"></span>
+                        <span className="folder-name"> {folder.name} </span>
+                    </button>
                 ))}
             </>
         </div>
