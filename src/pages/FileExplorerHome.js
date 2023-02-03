@@ -5,6 +5,7 @@ import LockModal from "../components/LockFolderModal/LockModal.js";
 import SetPinModal from "../components/SetPinModal/SetPinModal.js";
 import AddFileModal from "../components/AddFileModal/AddFileModal.js";
 import AddFolderModal from "../components/AddFolderModal/AddFolderModal.js";
+import EditFileModal from "../components/EditFileModal/EditFileModal.js";
 import { getStatus } from "../api/PinVerification.js";
 import {
     getFiles,
@@ -108,6 +109,10 @@ function FileExplorerHome() {
         console.log(filesList);
     }, [folderName]);
 
+    function handleUpdateData() {
+        // Re-fetch data from the API and update the state
+        getAllFiles();
+    }
     /** Search functions */
     const [value, setValue] = useState("");
 
@@ -137,8 +142,18 @@ function FileExplorerHome() {
         // our api to fetch the search result
         console.log("search ", searchTerm);
         toggleClass();
-
+        openEditFileModal();
     };
+
+    const [showEditFileModal, setShowEditFileModal] = useState(false);
+    const [fileId, setFileId] = useState("");
+    const [file, setFile] = useState();
+
+    function openEditFileModal(file_id, file) {
+        setShowEditFileModal(true);
+        setFileId(file_id);
+        setFile(file);
+    }
 
     return (
         <div className="file-explorer-home-container">
@@ -156,6 +171,7 @@ function FileExplorerHome() {
                         <AddFileModal
                             show={showCreateFileModal}
                             onClose={() => setShowCreateFileModal(false)}
+                            onDataSaved={handleUpdateData}
                         />
                     )}
                     <button
@@ -222,7 +238,10 @@ function FileExplorerHome() {
                                 .slice(0, 5)
                                 .map((file) => (
                                     <div
-                                        onClick={() => onSearch(file.name)}
+                                        onClick={() => {
+                                            onSearch(file.name);
+                                            openEditFileModal(file._id, file)
+                                        }}
                                         className="dropdown-row"
                                         key={file._id}
                                     ><div className="dropdown-row-icon"></div>
@@ -230,6 +249,14 @@ function FileExplorerHome() {
                                     </div>
                                 ))}
                         </div>
+                        {showEditFileModal && (
+                    <EditFileModal
+                        id={fileId}
+                        file={file}
+                        show={showEditFileModal}
+                        onClose={() => setShowEditFileModal(false)}
+                    />
+                )}
                     </div>
 
                     {/* <div className="search-bar">

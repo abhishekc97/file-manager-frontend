@@ -20,6 +20,7 @@ function LockModal({ show, onClose }) {
             verifyPin(pin).then((response) => {
                 if (!response) {
                     console.log("no response");
+                    setError(true);
                 } else {
                     console.log(response);
                     localStorage.setItem("Lock_Is_On", false);

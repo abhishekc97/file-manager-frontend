@@ -4,7 +4,7 @@ import { getFiles } from "../../api/FileOperations.js";
 import EditFileModal from "../EditFileModal/EditFileModal.js";
 import "./Files.css";
 
-function File({ filesList }) {
+function Files({ filesList }) {
     const [showEditFileModal, setShowEditFileModal] = useState(false);
 
     // const navigate = useNavigate();
@@ -51,6 +51,15 @@ function File({ filesList }) {
     //     localStorage.setItem("File_Added", "false");
     // }, [refresh]);
 
+    const [fileId, setFileId] = useState("");
+    const [file, setFile] = useState();
+
+    function openEditFileModal(file_id, file) {
+        setShowEditFileModal(true);
+        setFileId(file_id);
+        setFile(file);
+    }
+
     return (
         <div className="file-container">
             <>
@@ -59,24 +68,25 @@ function File({ filesList }) {
                         <button
                             className="file-button"
                             onClick={() => {
-                                setShowEditFileModal(true);
+                                openEditFileModal(file._id, file);
                             }}
                         >
                             <span className="file-icon"></span>
                         </button>
                         <div className="file-name">{file.name}</div>
-                        {showEditFileModal && (
-                            <EditFileModal
-                                id={file._id}
-                                show={showEditFileModal}
-                                onClose={() => setShowEditFileModal(false)}
-                            />
-                        )}
                     </div>
                 ))}
+                {showEditFileModal && (
+                    <EditFileModal
+                        id={fileId}
+                        file={file}
+                        show={showEditFileModal}
+                        onClose={() => setShowEditFileModal(false)}
+                    />
+                )}
             </>
         </div>
     );
 }
 
-export default File;
+export default Files;
