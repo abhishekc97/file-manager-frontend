@@ -22,7 +22,7 @@ function LockModal({ show, onClose }) {
                     console.log("no response");
                     setError(true);
                 } else {
-                    console.log(response);
+                    // console.log(response);
                     localStorage.setItem("Lock_Is_On", false);
                     onClose();
                 }

@@ -19,7 +19,7 @@ function SetPinModal({ show, onClose }) {
                 if (!response) {
                     console.log("No response");
                 } else {
-                    console.log(response);
+                    // console.log(response);
                     console.log("Pin updated frontend");
                     onClose();
                 }
@@ -30,7 +30,7 @@ function SetPinModal({ show, onClose }) {
                     if (!response) {
                         console.log("no response");
                     } else {
-                        console.log(response);
+                        // console.log(response);
                         onClose();
                     }
                 })
@@ -47,10 +47,12 @@ function SetPinModal({ show, onClose }) {
     useEffect(() => {
         const pinAvailable = localStorage.getItem("Pin_exists");
         console.log(pinAvailable);
-        if (pinAvailable) {
+        if (pinAvailable === "true") {
             setPinExists(true);
+        } else {
+            setPinExists(false);
         }
-        setPinExists(false);
+        
     }, []);
 
     const [passwordShown1, setPasswordShown1] = useState(false);

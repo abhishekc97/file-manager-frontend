@@ -4,7 +4,7 @@ import { getFiles } from "../../api/FileOperations.js";
 import EditFileModal from "../EditFileModal/EditFileModal.js";
 import "./Files.css";
 
-function Files({ filesList }) {
+function Files({ filesList, updateCounter }) {
     const [showEditFileModal, setShowEditFileModal] = useState(false);
 
     // const navigate = useNavigate();
@@ -59,6 +59,10 @@ function Files({ filesList }) {
         setFileId(file_id);
         setFile(file);
     }
+
+    useEffect(() => {
+        // Re-render the component whenever the data or updateCounter changes
+      }, [filesList, updateCounter]);
 
     return (
         <div className="file-container">

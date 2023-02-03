@@ -85,7 +85,7 @@ export async function getFiles(folder) {
         const response = await axios.get(reqUrl);
 
         if (response) {
-            console.log(response);
+            // console.log(response);
             return response;
         }
     } catch (error) {
@@ -113,7 +113,7 @@ export async function getAllFilesFromCollection() {
         const reqUrl = `${process.env.REACT_APP_BACKEND_URL}/api/operations/getAllFiles`;
         const response = await axios.get(reqUrl);
         if (response) {
-            console.log(response);
+            // console.log(response);
             return response.data;
         }
     } catch (error) {

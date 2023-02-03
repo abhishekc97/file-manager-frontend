@@ -51,7 +51,7 @@ export async function updateExistingPin(pin) {
         const response = await axios.post(reqUrl, { pin: pin });
 
         if(response) {
-            console.log(response);
+            // console.log(response);
             return response;
         }
     } catch (error) {

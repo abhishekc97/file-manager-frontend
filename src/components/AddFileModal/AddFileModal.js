@@ -14,7 +14,7 @@ function AddFileModal({ show, onClose, fileAdded, onDataSaved }) {
 
     // useparams for getting current folder
     let { folderName } = useParams();
-    console.log(folderName);
+    // console.log(folderName);
 
     function createFile() {
         if (folderName === "") {
@@ -23,7 +23,7 @@ function AddFileModal({ show, onClose, fileAdded, onDataSaved }) {
             // let folderNametemp = "folder 3"
             createNewFile(fileName, folderName)
                 .then((response) => {
-                    console.log(response);
+                    // console.log(response);
                     console.log("New File made");
                     // navigate(`/${folderName}`);
                 })

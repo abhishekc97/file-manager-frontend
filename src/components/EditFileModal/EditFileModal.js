@@ -11,9 +11,9 @@ function EditFileModal({ id, show, onClose, file }) {
     const [error, setError] = useState(false);
     const [showAutoSaveMessage, setShowAutoSaveMessage] = useState(false);
 
-    console.log(file._id);
-    console.log(file.name);
-    console.log(file.contents);
+    // console.log(file._id);
+    // console.log(file.name);
+    // console.log(file.contents);
 
     async function saveFile() {
         const results = await editFileContents(id, fileContent);
@@ -21,7 +21,7 @@ function EditFileModal({ id, show, onClose, file }) {
     }
 
     function handleInputChange(e) {
-        console.log(e.target.value);
+        // console.log(e.target.value);
         setFileContent(e.target.value);
     }
 

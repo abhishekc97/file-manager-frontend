@@ -90,9 +90,9 @@ function FileExplorerHome() {
     ]);
 
     async function getAllFiles() {
-        console.log(folderName);
+        // console.log(folderName);
         const results = await getFiles(folderName);
-        console.log(results);
+        // console.log(results);
         setFilesList(results.data);
 
         if (results) {
@@ -106,13 +106,17 @@ function FileExplorerHome() {
     }
     useEffect(() => {
         getAllFiles();
-        console.log(filesList);
+        // console.log(filesList);
     }, [folderName]);
 
     function handleUpdateData() {
         // Re-fetch data from the API and update the state
         getAllFiles();
+        setUpdateCounter(updateCounter + 1);
     }
+
+    const [updateCounter, setUpdateCounter] = useState(0);
+
     /** Search functions */
     const [value, setValue] = useState("");
 
@@ -120,13 +124,13 @@ function FileExplorerHome() {
 
     const [dropdownIsActive, setActive] = useState("false");
     const toggleClass = () => {
-      setActive(!dropdownIsActive); 
-     };
+        setActive(!dropdownIsActive);
+    };
 
     async function fetchAllFiles() {
         const results = await getAllFilesFromCollection();
         setFiles(results);
-        console.log(results);
+        // console.log(results);
     }
     useEffect(() => {
         fetchAllFiles();
@@ -211,7 +215,10 @@ function FileExplorerHome() {
                 <div className="app-options-bar">
                     <div className="search-container">
                         <div className="search-inner">
-                            <button className="search-icon" onClick={() => onSearch(value)}></button>
+                            <button
+                                className="search-icon"
+                                onClick={() => onSearch(value)}
+                            ></button>
                             <input
                                 type="text"
                                 value={value}
@@ -219,7 +226,11 @@ function FileExplorerHome() {
                                 className="search-input-box"
                             />
                         </div>
-                        <div className={dropdownIsActive ?"dropdown" : "dropdown-empty"}>
+                        <div
+                            className={
+                                dropdownIsActive ? "dropdown" : "dropdown-empty"
+                            }
+                        >
                             {files
                                 .filter((file) => {
                                     const searchTerm =
@@ -230,33 +241,34 @@ function FileExplorerHome() {
                                         typeof file.name === "string"
                                             ? file.name.toLocaleLowerCase()
                                             : "";
-                                    return (searchTerm &&
+                                    return searchTerm &&
                                         typeof name === "string"
-                                        ? name.startsWith(searchTerm)
-                                        : "" && name !== searchTerm);
+                                        ? name.includes(searchTerm)
+                                        : "" && name !== searchTerm;
                                 })
                                 .slice(0, 5)
                                 .map((file) => (
                                     <div
                                         onClick={() => {
                                             onSearch(file.name);
-                                            openEditFileModal(file._id, file)
+                                            openEditFileModal(file._id, file);
                                         }}
                                         className="dropdown-row"
                                         key={file._id}
-                                    ><div className="dropdown-row-icon"></div>
+                                    >
+                                        <div className="dropdown-row-icon"></div>
                                         {file.name}
                                     </div>
                                 ))}
                         </div>
                         {showEditFileModal && (
-                    <EditFileModal
-                        id={fileId}
-                        file={file}
-                        show={showEditFileModal}
-                        onClose={() => setShowEditFileModal(false)}
-                    />
-                )}
+                            <EditFileModal
+                                id={fileId}
+                                file={file}
+                                show={showEditFileModal}
+                                onClose={() => setShowEditFileModal(false)}
+                            />
+                        )}
                     </div>
 
                     {/* <div className="search-bar">
@@ -280,13 +292,19 @@ function FileExplorerHome() {
                             />,
                             document.body
                         )}
-                    <button className="logout-button">
+                    <button
+                        className="logout-button"
+                        onClick={() => setShowLockModal(true)}
+                    >
                         <span className="logout-icon"></span>
                     </button>
                 </div>
                 <hr />
                 <div className="file-section-container">
-                    <Files filesList={filesList} />
+                    <Files
+                        filesList={filesList}
+                        updateCounter={updateCounter}
+                    />
                 </div>
             </div>
         </div>
