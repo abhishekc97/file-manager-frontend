@@ -2,11 +2,9 @@ import React, { useEffect, useState } from "react";
 import "./LockModal.css";
 import Modal from "react-bootstrap/Modal";
 import { verifyPin } from "../../api/PinVerification";
+import PinInput from "react-pin-input";
 
 function LockModal({ show, onClose }) {
-    // const showHideClassName = show
-    //     ? "modal display-block"
-    //     : "modal display-none";
 
     const [pin, setPin] = useState("");
     const [error, setError] = useState(false);
@@ -28,7 +26,6 @@ function LockModal({ show, onClose }) {
                 }
             });
         }
-        
     }
 
     return (
@@ -39,25 +36,29 @@ function LockModal({ show, onClose }) {
             className="lockpin-modal"
         >
             <div className="modal-contents">
-                {/* <div className="pin-heading">Enter Pin</div> */}
-                <label htmlFor="">Enter Account pin</label>
-                <br />
-                <input
-                    type="password"
-                    name="pin"
-                    maxLength={4}
-                    onChange={(e) => {
-                        setPin(e.target.value);
+                <div className="pin-heading">Enter Account Pin</div>
+                <PinInput
+                    length={4}
+                    initialValue=""
+                    secret
+                    onChange={(value, index) => {}}
+                    type="numeric"
+                    inputMode="number"
+                    style={{ padding: "10px" }}
+                    inputStyle={{ borderColor: "#EBF0F5"}}
+                    inputFocusStyle={{ borderColor: "black" }}
+                    onComplete={(value, index) => {
+                        setPin(value); 
                     }}
-                ></input>
+                    autoSelect={true}
+                    regexCriteria={/^[ A-Za-z0-9_@./#&+-]*$/}
+                />
                 <br />
                 {error && (
                     <label style={{ color: "red" }}>
                         Please enter the correct pin
                     </label>
                 )}
-                <br />
-                {/* <div className="pin-boxes">Pin</div> */}
                 <button onClick={verifyEnteredPin} className="enter-pin-button">
                     Enter
                 </button>

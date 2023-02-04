@@ -5,10 +5,16 @@
     display: flex;
     flex-direction: row;
     border: 1px solid black;
+
+    align-self: center;
+
+    max-width: 1440px;
+    min-width: 1000px;
 }
 
 .sidebar {
     height: 100vh;
+    /* width: 36%; */
     width: 380px;
     background-color: #e5e5e5;
     display: flex;
@@ -24,7 +30,8 @@
     height: 40px;
     left: 50px;
     top: 50.36px;
-    border: solid 2px black;
+    border: none;
+    background: url("../../public/images/logo.png") no-repeat;
 }
 
 .add-buttons-wrapper {
@@ -51,7 +58,7 @@
 }
 
 .add-file {
-    box-sizing: border-box;
+    /* box-sizing: border-box; */
 
     display: flex;
     flex-direction: row;
@@ -144,7 +151,8 @@
 
 .right-container {
     height: 100vh;
-    width: 1060px;
+    /* width: 74%; */
+    width: 1080px;
     display: flex;
     flex-direction: column;
     padding: 30px;

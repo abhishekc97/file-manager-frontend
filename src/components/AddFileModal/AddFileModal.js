@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 
 import "./AddFileModal.css";
 
-function AddFileModal({ show, onClose, fileAdded, onDataSaved }) {
+function AddFileModal({ show, onClose, onFileAdded }) {
     const navigate = useNavigate();
 
     const [fileName, setFileName] = useState("");
@@ -26,6 +26,7 @@ function AddFileModal({ show, onClose, fileAdded, onDataSaved }) {
                     // console.log(response);
                     console.log("New File made");
                     // navigate(`/${folderName}`);
+                    onFileAdded();
                 })
                 .catch((err) => {
                     console.log(err);
@@ -33,7 +34,7 @@ function AddFileModal({ show, onClose, fileAdded, onDataSaved }) {
             onClose();
             localStorage.setItem("File_Added", "true");
             // fileAdded += 1;
-            onDataSaved();
+            
         }
     }
 

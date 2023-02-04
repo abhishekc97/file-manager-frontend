@@ -1,7 +1,7 @@
 import "./App.css";
 import FileExplorerHome from "./pages/FileExplorerHome";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import EditFileModal from "./components/EditFileModal/EditFileModal";
+import Files from "./components/Files/Files";
 
 function App() {
     return (
@@ -27,7 +27,7 @@ function App() {
                     path="/:folderName/:fileName"
                     element={
                         <div className="App">
-                            <EditFileModal />
+                            <Files />
                         </div>
                     }
                 ></Route>

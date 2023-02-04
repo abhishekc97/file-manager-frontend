@@ -109,13 +109,18 @@ function FileExplorerHome() {
         // console.log(filesList);
     }, [folderName]);
 
-    function handleUpdateData() {
+    const [updateCounter, setUpdateCounter] = useState(0);
+
+    async function handleFileAdded() {
         // Re-fetch data from the API and update the state
         getAllFiles();
+        console.log("inside handlefileadded");
+        // const results = await getFiles(folderName);
+        // console.log(results);
+        // setFilesList(results.data);
+
         setUpdateCounter(updateCounter + 1);
     }
-
-    const [updateCounter, setUpdateCounter] = useState(0);
 
     /** Search functions */
     const [value, setValue] = useState("");
@@ -162,7 +167,7 @@ function FileExplorerHome() {
     return (
         <div className="file-explorer-home-container">
             <div className="sidebar">
-                <div className="app-logo">Logo</div>
+                <div className="app-logo"></div>
                 <div className="add-buttons-wrapper">
                     <button
                         className="add-file"
@@ -175,7 +180,7 @@ function FileExplorerHome() {
                         <AddFileModal
                             show={showCreateFileModal}
                             onClose={() => setShowCreateFileModal(false)}
-                            onDataSaved={handleUpdateData}
+                            onFileAdded={handleFileAdded}
                         />
                     )}
                     <button
