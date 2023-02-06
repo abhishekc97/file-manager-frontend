@@ -2,54 +2,10 @@ import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { getFiles } from "../../api/FileOperations.js";
 import EditFileModal from "../EditFileModal/EditFileModal.js";
-import "./Files.css";
+import styles from "./Files.module.css";
 
 function Files({ filesList, updateCounter }) {
     const [showEditFileModal, setShowEditFileModal] = useState(false);
-
-    // const navigate = useNavigate();
-    // // useparams for getting current folder
-    // let { folderName } = useParams();
-
-    // const [filesList, setFilesList] = useState([
-    //     { name: "" },
-    //     { name: "file 2" },
-    // ]);
-
-    // async function getAllFiles() {
-    //     console.log(folderName);
-    //     const results = await getFiles(folderName);
-    //     console.log(results);
-    //     setFilesList(results.data);
-
-    //     if (results) {
-    //         if (!folderName) {
-    //             const defaultFile = filesList[0];
-    //             const defaultFileName = defaultFile.name;
-    //             console.log(defaultFileName);
-    //             navigate(`/${folderName}`); // navigate(`/${folderName}/:${defaultFileName}`);
-    //         }
-    //     }
-    // }
-    // useEffect(() => {
-    //     getAllFiles();
-    //     console.log(filesList);
-    // }, [folderName]); //filesList[0]]
-
-    // function openFile(id) {
-    //     console.log(id);
-    //     setShowEditFileModal(true);
-    // }
-
-    // async function refreshAll() {
-    //     getAllFiles();
-    // }
-
-    // let refresh = refreshNewFiles;
-    // useEffect(() => {
-    //     refreshAll();
-    //     localStorage.setItem("File_Added", "false");
-    // }, [refresh]);
 
     const [fileId, setFileId] = useState("");
     const [file, setFile] = useState();
@@ -65,19 +21,19 @@ function Files({ filesList, updateCounter }) {
       }, [filesList, updateCounter]);
 
     return (
-        <div className="file-container">
+        <div className={styles.fileContainer}>
             <>
                 {filesList.map((file, index) => (
-                    <div className="file-box" key={index}>
+                    <div className={styles.fileBox} key={index}>
                         <button
-                            className="file-button"
+                            className={styles.fileButton}
                             onClick={() => {
                                 openEditFileModal(file._id, file);
                             }}
                         >
-                            <span className="file-icon"></span>
+                            <span className={styles.fileIcon}></span>
                         </button>
-                        <div className="file-name">{file.name}</div>
+                        <div className={styles.fileName}>{file.name}</div>
                     </div>
                 ))}
                 {showEditFileModal && (

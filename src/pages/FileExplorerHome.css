@@ -1,33 +1,33 @@
 .file-explorer-home-container {
-    height: 100vh;
-    width: 1440px;
-    background-color: white;
     display: flex;
     flex-direction: row;
-    border: 1px solid black;
-
-    align-self: center;
-
+    height: 100vh;
+    width: 1440px;
     max-width: 1440px;
     min-width: 1000px;
+
+    background-color: white;
+    /* border: 1px solid black; */
+    align-self: center;
 }
 
 .sidebar {
-    height: 100vh;
-    /* width: 36%; */
-    width: 380px;
-    background-color: #e5e5e5;
     display: flex;
     flex-direction: column;
-    align-items: center;
     padding: 30px;
-    justify-content: center;
+    height: 100vh;
+    width: 380px;
+    
+    background-color: #e5e5e5;
+    align-items: center;
 }
 
 .app-logo {
-    position: absolute;
+    display: flex;
+    align-self: flex-start;
     width: 160px;
-    height: 40px;
+    height: 50px;
+    margin: 30px 20px;
     left: 50px;
     top: 50.36px;
     border: none;
@@ -35,54 +35,37 @@
 }
 
 .add-buttons-wrapper {
+    display: flex;
     flex-direction: row;
+    margin: 10px;
     top: 17%;
-    position: absolute;
-
-    /* border: 1px solid black; */
     height: 60px;
     width: 360px;
-    display: flex;
     justify-content: space-evenly;
 }
 
-.addfile-btn-wrapper {
+.add-file {
     display: flex;
     flex-direction: row;
+    height: 40px;
+    width: 113px;
+    align-items: center;
+    justify-content: center;
+    margin: 10px;
+    padding: 10px;
+    gap: 10px;
+    
+    border: 1px solid #445ee2;
+    border-radius: 5px;
+    cursor: pointer;
 }
 
 .add-file-icon {
-    background: url("../../public/images/add-file.png") no-repeat;
     height: 22px;
     width: 19px;
+    background: url("../../public/images/add-file.png") no-repeat;
 }
 
-.add-file {
-    /* box-sizing: border-box; */
-
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    padding: 10px;
-    gap: 10px;
-
-    /* position: absolute;
-    left: 3.47%;
-    right: 88.68%;
-    top: 17%;
-    bottom: 78.56%; */
-
-    height: 40px;
-    width: 113px;
-
-    /* background: url("../../public/images/add-file.png") no-repeat; */
-
-    border: 1px solid #445ee2;
-    border-radius: 5px;
-
-    cursor: pointer;
-}
 
 .add-folder-icon {
     background: url("../../public/images/addfolder.png") no-repeat;
@@ -90,26 +73,18 @@
     width: 23px;
 }
 .add-folder {
-    box-sizing: border-box;
-
     display: flex;
     flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    padding: 10px;
-    gap: 10px;
-
-    /* position: absolute;
-    left: 13.33%;
-    right: 77.01%;
-    top: 17%;
-    bottom: 78.67%; */
-
-    height: 40px;
-    width: 139px;
-
+    margin: 10px;
     border: 1px solid #445ee2;
     border-radius: 5px;
+    padding: 10px;
+    align-items: center;
+    justify-content: center;
+    height: 40px;
+    width: 139px;
+    gap: 10px;
+
     cursor: pointer;
 }
 
@@ -117,6 +92,47 @@
     height: 450px;
     width: 280px;
     overflow-y: scroll;
+    margin: 10px
+}
+/* width */
+::-webkit-scrollbar {
+    width: 7px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: #888;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+
+.lock-button-wrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin: 50px 20px;
+    padding: 8px 16px;
+    gap: 18px;
+
+    width: 281px;
+    height: 44px;
+
+    background: #445ee2;
+    border-radius: 5px;
+    border: none;
+
+    color: white;
+    cursor: pointer;
 }
 
 .lock-now-icon {
@@ -127,46 +143,24 @@
     background-position-y: center;
 }
 
-.lock-button-wrapper {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    padding: 8px 16px;
-    gap: 18px;
-
-    position: absolute;
-    width: 281px;
-    height: 44px;
-    left: 50px;
-    top: 806px;
-
-    background: #445ee2;
-    border-radius: 5px;
-    border: none;
-
-    color: white;
-    cursor: pointer;
-}
-
 .right-container {
+    display: flex;
+    flex-direction: column;
     height: 100vh;
     /* width: 74%; */
     width: 1080px;
-    display: flex;
-    flex-direction: column;
     padding: 30px;
     background-color: white;
 }
 
 .app-options-bar {
-    padding: 25px;
     display: flex;
     flex-direction: row;
+    padding: 25px;
+    margin-bottom: 15px;
 }
 
 .search-container {
-    width: 280px;
     display: flex;
     flex-direction: column;
     width: 486px;
@@ -174,9 +168,9 @@
 
 .search-inner {
     display: flex;
+    flex-direction: row;
     width: 486px;
     height: 44px;
-    flex-direction: row;
     justify-content: space-between;
     align-items: center;
     border: 2px solid #ebf0f5;
@@ -222,35 +216,32 @@
     border-radius: 5px;
 }
 
-
 .dropdown-row {
-    cursor: pointer;
-    text-align: start;
+    display: flex;
+    flex-direction: row;
     margin: 2px 0;
     width: 486px;
-
-    /* position: absolute; */
     height: 28px;
-
+    
     font-family: 'DM Sans';
     font-style: normal;
     font-weight: 400;
     font-size: 14px;
     line-height: 28px;
-
-    display: flex;
-    flex-direction: row;
+    text-align: start;
     
+    cursor: pointer;
 }
+
 .dropdown-empty {
     border: none;
     display: none;
 }
 
 .dropdown-row-icon {
-    background: url("../../public/images/dropdownicon.png");
     height: 21px;
     width: 16px;
+    background: url("../../public/images/dropdownicon.png");
     background-size: 100%;
     background-position: center;
     background-blend-mode: lighten;
@@ -261,28 +252,33 @@
 }
 
 .settings-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
     position: absolute;
     width: 44px;
     height: 44px;
     left: 1298px;
     top: 49px;
+
     background-color: white;
     border: solid 1px #ebf0f5;
     border-radius: 5px;
     cursor: pointer;
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
 }
 
 .settings-icon {
-    background: url("../../public/images/setting.png") no-repeat;
     height: 24px;
     width: 24px;
+    background: url("../../public/images/setting.png") no-repeat;
 }
 
 .logout-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
     position: absolute;
     width: 44px;
     height: 44px;
@@ -293,32 +289,30 @@
     border-radius: 5px;
     cursor: pointer;
 
-    display: flex;
-    justify-content: center;
-    align-items: center;
 }
 
 .logout-icon {
-    background: url("../../public/images/log-out.png") no-repeat;
     height: 20px;
     width: 16px;
+    background: url("../../public/images/log-out.png") no-repeat;
 }
 
 hr {
-    top: 193px;
     position: absolute;
+    margin: 5px;
+    top: 193px;
+    left: 431px;
     height: 1px;
     width: 959px;
-    left: 431px;
     background: #ebf0f5;
 }
 
 .file-section-container {
     position: absolute;
+    margin: 20px;
+    padding: 10px;
     top: 230px;
     height: 550px;
     width: 930px;
     /* border: 1px solid #e5e5e5; */
-    padding: 10px;
-    margin: 20px;
 }

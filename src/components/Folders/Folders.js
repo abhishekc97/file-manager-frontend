@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { getAllFolders } from "../../api/FileOperations.js";
-import "./Folders.css";
+import styles from "./Folders.module.css";
 
 function Folder() {
     const navigate = useNavigate();
@@ -35,18 +35,18 @@ function Folder() {
     }
 
     return (
-        <div className="folders-container">
+        <div className={styles.foldersContainer}>
             <>
                 {foldersList.map((folder, index) => (
                     <button
-                        className="folder-box"
+                        className={folder.name === folderName ? styles.folderBoxSelected: styles.folderBox}
                         key={index}
                         onClick={() => {
                             navigateToFolder(folder.name);
                         }}
                     >
-                        <span className="folder-icon"></span>
-                        <span className="folder-name"> {folder.name} </span>
+                        <span className={styles.folderIcon}></span>
+                        <span className={styles.folderName}> {folder.name} </span>
                     </button>
                 ))}
             </>

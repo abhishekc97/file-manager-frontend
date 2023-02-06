@@ -62,6 +62,7 @@ export async function createNewFile(name, folder) {
 // POST Request
 export async function editFileContents(id, contents) {
     try {
+        console.log(contents);
         const reqUrl = `${process.env.REACT_APP_BACKEND_URL}/api/operations/editFileContent`;
         const response = await axios.post(reqUrl, {
             id: id,
@@ -101,7 +102,7 @@ export async function getFile(id) {
 
         if (response) {
             console.log(response);
-            return response;
+            return response.data;
         }
     } catch (error) {
         console.log(error);

@@ -3,7 +3,7 @@ import Modal from "react-bootstrap/Modal";
 import { createNewFolder } from "../../api/FileOperations";
 import { useNavigate } from "react-router-dom";
 
-import "./AddFolderModal.css";
+import styles from "./AddFolderModal.module.css";
 
 function AddFolderModal({ show, onClose }) {
     const navigate = useNavigate();
@@ -33,10 +33,10 @@ function AddFolderModal({ show, onClose }) {
             show={show}
             onHide={onClose}
             keyboard={false}
-            className="addfolder-modal"
+            className={styles.addfolderModal}
         >
-            <div className="modal-contents">
-                <div className="folder-heading">Create Folder</div>
+            <div className={styles.modalContents}>
+                <div className={styles.folderHeading}>Create Folder</div>
                 <label htmlFor="">Enter folder name</label>
                 <input
                     type="text"
@@ -50,7 +50,7 @@ function AddFolderModal({ show, onClose }) {
                         Please enter a folder name
                     </label>
                 )}
-                <button onClick={createFolder} className="create-folder-button">
+                <button onClick={createFolder} className={styles.createFolderButton}>
                     Create now
                 </button>
             </div>

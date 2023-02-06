@@ -1,34 +1,29 @@
-.addfile-modal {
+.editfileModal {
     position: absolute;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-
-    width: 399.83px;
-    height: 305.56px;
-    left: 520px;
-    top: 297px;
-
+    width: 548px;
+    height: 607px;
+    left: 446px;
+    top: 152px;
     background: #ffffff;
     border: 1px solid #c8d6e5;
     border-radius: 10px;
 }
 
-.modal-contents {
+.modalContents {
     display: flex;
     flex-direction: column;
     align-items: center;
 
-    height: 220px;
-    width: 350px;
+    height: 500px;
+    width: 486px;
     border: none;
     margin: auto;
     padding: 15px;
 }
 
-.file-heading {
+.fileHeading {
     display: flex;
+    flex-direction: row;
     justify-content: center;
 
     width: 167px;
@@ -39,7 +34,21 @@
     letter-spacing: -0.02em;
 
     color: #1e272e;
-    align-self: center;
+    align-self: flex-start;
+}
+
+.autosaveBox {
+    width: 167px;
+    height: 28px;
+    font-weight: 300;
+    font-size: 15px;
+    line-height: 28px;
+    align-self: self-end;
+}
+
+.editfileInput{
+    height: 400px;
+    width: 467px;
 }
 
 .label {
@@ -53,11 +62,13 @@
     color: #566474;
 }
 
-input {
+.input {
     margin-top: 10px;
+    height: 395px;
+    left: 486.1px;
 }
 
-.create-file-button {
+.createfileButton {
     display: flex;
     flex-direction: row;
     justify-content: center;

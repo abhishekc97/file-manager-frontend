@@ -23,14 +23,6 @@ function App() {
                         </div>
                     }
                 ></Route>
-                <Route
-                    path="/:folderName/:fileName"
-                    element={
-                        <div className="App">
-                            <Files />
-                        </div>
-                    }
-                ></Route>
             </Routes>
         </BrowserRouter>
     );

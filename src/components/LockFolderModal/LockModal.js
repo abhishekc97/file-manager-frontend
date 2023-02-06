@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from "react";
-import "./LockModal.css";
 import Modal from "react-bootstrap/Modal";
 import { verifyPin } from "../../api/PinVerification";
 import PinInput from "react-pin-input";
-
+import styles from "./LockModal.module.css";
 function LockModal({ show, onClose }) {
 
     const [pin, setPin] = useState("");
@@ -33,10 +32,10 @@ function LockModal({ show, onClose }) {
             show={show}
             backdrop="static"
             keyboard={false}
-            className="lockpin-modal"
+            className={styles.lockpinModal}
         >
-            <div className="modal-contents">
-                <div className="pin-heading">Enter Account Pin</div>
+            <div className={styles.modalContents}>
+                <div className={styles.pinHeading}>Enter Account Pin</div>
                 <PinInput
                     length={4}
                     initialValue=""
@@ -53,15 +52,15 @@ function LockModal({ show, onClose }) {
                     autoSelect={true}
                     regexCriteria={/^[ A-Za-z0-9_@./#&+-]*$/}
                 />
-                <br />
+                <button onClick={verifyEnteredPin} className={styles.enterpinButton}>
+                    Enter
+                </button>
                 {error && (
                     <label style={{ color: "red" }}>
                         Please enter the correct pin
                     </label>
                 )}
-                <button onClick={verifyEnteredPin} className="enter-pin-button">
-                    Enter
-                </button>
+                
             </div>
         </Modal>
     );

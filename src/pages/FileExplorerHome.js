@@ -22,7 +22,7 @@ function FileExplorerHome() {
 
     const [showCreateFileModal, setShowCreateFileModal] = useState(false);
     const [showCreateFolderModal, setShowCreateFolderModal] = useState(false);
-
+    const [showEditFileModal, setShowEditFileModal] = useState(false);
     // const [searchText, setSearchText] = useState("");
 
     // console.log(showCreateFileModal, showCreateFolderModal, showEditFileModal);
@@ -106,7 +106,6 @@ function FileExplorerHome() {
     }
     useEffect(() => {
         getAllFiles();
-        // console.log(filesList);
     }, [folderName]);
 
     const [updateCounter, setUpdateCounter] = useState(0);
@@ -139,7 +138,7 @@ function FileExplorerHome() {
     }
     useEffect(() => {
         fetchAllFiles();
-    }, []);
+    },[showEditFileModal]);
 
     const onChange = (event) => {
         toggleClass();
@@ -154,7 +153,7 @@ function FileExplorerHome() {
         openEditFileModal();
     };
 
-    const [showEditFileModal, setShowEditFileModal] = useState(false);
+    
     const [fileId, setFileId] = useState("");
     const [file, setFile] = useState();
 

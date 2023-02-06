@@ -1,16 +1,14 @@
-.folders-container {
+.foldersContainer {
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-.folder-box {
+.folderBox {
     display: flex;
     flex-direction: row;
     width: 262px;
     height: 51.81px;
-    /* left: 50px;
-    top: 243.27px; */
 
     margin-top: 23px;
     padding: 5px;
@@ -18,30 +16,39 @@
     border-radius: 5px;
     border: none;
     align-items: center;
-    /* justify-content: space-evenly; */
 }
 
-.folder-icon {
+.folderBoxSelected {
+    display: flex;
+    flex-direction: row;
+    width: 262px;
+    height: 51.81px;
+
+    margin-top: 23px;
+    padding: 5px;
+    background: #c4dbf1;
+    border-radius: 5px;
+    border: none;
+    align-items: center;
+}
+
+.folderIcon {
+    margin: 15px 20px 15px 20px;
+    align-self: center;
+
     background: url("../../../public/images/folder.png") no-repeat;
     width: 23px;
     height: 17px;
-    /* left: 70px;
-    top: 261.8px; */
+
     background-position: center; /* center the image within the button */
     background-blend-mode: lighten;
     background-repeat: no-repeat;
     
     background-position-x: center;
     background-position-y: center;
-    
-    margin: 20px 0px 30px 0px;
-    margin-left: 5px;
-    margin-right: 20px;
-    align-self: center
-
 }
 
-.folder-name {
+.folderName {
     font-weight: 400;
     font-size: 16px;
     line-height: 28px;

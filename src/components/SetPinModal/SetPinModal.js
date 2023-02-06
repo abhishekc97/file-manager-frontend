@@ -3,7 +3,7 @@ import React, { useEffect, useRef, useState } from "react";
 import Modal from "react-bootstrap/Modal";
 import { createPin, updateExistingPin } from "../../api/PinVerification.js";
 
-import "./SetPinModal.css";
+import styles from "./SetPinModal.module.css";
 
 function SetPinModal({ show, onClose }) {
     const [pin, setPin] = useState("");
@@ -68,12 +68,12 @@ function SetPinModal({ show, onClose }) {
     return (
         <Modal
             show={show}
-            backdrop="static"
+            onHide={onClose}
             keyboard={false}
-            className="setpin-modal"
+            className={styles.setpinModal}
         >
-            <div className="modal-contents">
-                <div className="pin-heading">Set Pin</div>
+            <div className={styles.modalContents}>
+                <div className={styles.pinHeading}>Set Pin</div>
                 {/* <div className="pin-boxes"> */}
                 <label htmlFor="">Enter new pin</label>
                 <br />
@@ -113,7 +113,7 @@ function SetPinModal({ show, onClose }) {
                         Error while setting a pin
                     </label>
                 )}
-                <button onClick={createNewPin} className="enter-pin-button">
+                <button onClick={createNewPin} className={styles.enterPinButton}>
                     Save Changes
                 </button>
             </div>

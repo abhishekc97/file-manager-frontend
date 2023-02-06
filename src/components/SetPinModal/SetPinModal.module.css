@@ -1,4 +1,4 @@
-.addfolder-modal {
+.setpinModal {
     position: absolute;
     display: flex;
     flex-direction: column;
@@ -6,18 +6,15 @@
     align-items: center;
 
     width: 399.83px;
-    height: 305.56px;
+    height: 416px;
     left: 520px;
     top: 297px;
-
-    background: #ffffff;
-    /* neutral dark */
-
-    border: 1px solid #c8d6e5;
     border-radius: 10px;
+    border: none;
+    background: white;
 }
 
-.modal-contents {
+.modalContents {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -29,7 +26,7 @@
     padding: 15px;
 }
 
-.folder-heading {
+.pinHeading {
     display: flex;
     justify-content: center;
 
@@ -44,35 +41,25 @@
     align-self: center;
 }
 
-.label {
-    margin-top: 20px;
-    font-weight: 500;
-    font-size: 16px;
-    line-height: 28px;
-    /* identical to box height, or 175% */
-    letter-spacing: -0.02em;
-    /* secondary text */
-    color: #566474;
-}
-
-input {
-    margin-top: 10px;
-}
-
-.create-folder-button {
+.enterPinButton {
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
+
     padding: 8px 16px;
     gap: 8px;
-
+    margin-top: 50px;
     width: 160px;
     height: 44px;
-    margin-top: 30px;
 
     color: #fff;
     background: #142683;
     border-radius: 5px;
+}
 
+
+.far {
+    margin-left: -30px;
+    cursor: pointer;
 }

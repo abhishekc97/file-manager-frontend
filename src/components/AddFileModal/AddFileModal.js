@@ -4,7 +4,7 @@ import { useParams } from "react-router-dom";
 import { createNewFile } from "../../api/FileOperations";
 import { useNavigate } from "react-router-dom";
 
-import "./AddFileModal.css";
+import styles from "./AddFileModal.module.css"
 
 function AddFileModal({ show, onClose, onFileAdded }) {
     const navigate = useNavigate();
@@ -47,10 +47,10 @@ function AddFileModal({ show, onClose, onFileAdded }) {
             show={show}
             onHide={onClose}
             keyboard={false}
-            className="addfile-modal"
+            className={styles.addfileModal}
         >
-            <div className="modal-contents">
-                <div className="file-heading">Create File</div>
+            <div className={styles.modalContents}>
+                <div className={styles.fileHeading}>Create File</div>
                 <label htmlFor="">Enter file name</label>
                 <input
                     type="text"
@@ -64,7 +64,7 @@ function AddFileModal({ show, onClose, onFileAdded }) {
                         Please enter a file name
                     </label>
                 )}
-                <button onClick={createFile} className="create-file-button">
+                <button onClick={createFile} className={styles.createFileButton}>
                     Create now
                 </button>
             </div>

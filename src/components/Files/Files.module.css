@@ -1,4 +1,4 @@
-.file-container {
+.fileContainer {
     display: grid;
     flex-direction: row;
     align-items: center;
@@ -6,7 +6,7 @@
     grid-gap: 10px;
 }
 
-.file-box {
+.fileBox {
     display: flex;
     flex-direction: column;
     height: 130px;
@@ -15,14 +15,14 @@
     margin: 10px 20px;
 }
 
-.file-button {
+.fileButton {
     height: 96px;
     width: 70px;
     border: none;
     background-color: white;
 }
 
-.file-icon {
+.fileIcon {
     height: 96px;
     width: 70px;
     display: block;
@@ -37,7 +37,7 @@
     background-position-y: center;
 }
 
-.file-name {
+.fileName {
     height: 30px;
     width: 70px;
     align-items: center;

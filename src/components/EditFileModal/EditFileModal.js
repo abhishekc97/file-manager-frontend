@@ -1,68 +1,103 @@
-import React, { useEffect, useState } from "react";
-import { ModalBody, ModalFooter, ModalHeader } from "react-bootstrap";
+import React, {
+    useEffect,
+    useRef,
+    useState,
+    useCallback,
+    useMemo,
+} from "react";
 import Modal from "react-bootstrap/Modal";
 import { editFileContents, getFile } from "../../api/FileOperations";
-
-import "./EditFileModal.css";
+import debounce from "lodash.debounce";
+import JoditEditor from "jodit-react";
+import styles from "./EditFileModal.module.css";
+import TextBox from "../TextBox/TextBox";
 
 function EditFileModal({ id, show, onClose, file }) {
-    
-    const [fileContent, setFileContent] = useState("");
-    const [error, setError] = useState(false);
-    const [showAutoSaveMessage, setShowAutoSaveMessage] = useState(false);
+    // Fetch the file data contents by using an API call, for inital value in textarea, to prevent it from saving empty string
+    let fileData;
+    const [initialContents, setInitialContents] = useState("");
 
-    // console.log(file._id);
-    // console.log(file.name);
-    // console.log(file.contents);
+    getFile(file._id).then((response) => {
+        fileData = response[0];
+        console.log(response);
+        setInitialContents(fileData.contents);
+        console.log(initialContents);
+    });
+
+    const [fileContent, setFileContent] = useState(initialContents);
+
+    const [showAutoSaveMessage, setShowAutoSaveMessage] = useState(false);
+    const [isLoading, setIsLoading] = useState(false);
+
+    const debouncedSave = useMemo(
+        debounce((nextContent) => {
+            editFileContents(file.id, nextContent)
+                .then((response) => {
+                    setIsLoading(false);
+                })
+                .catch((error) => {
+                    setIsLoading(false);
+                });
+        }, 1000),
+        []
+    );
+
+    const handleChange = (event) => {
+        const nextContent = event.target.value;
+        setFileContent(nextContent);
+        debouncedSave(nextContent);
+    };
 
     async function saveFile() {
         const results = await editFileContents(id, fileContent);
-        if(results) onClose();
+        if (results) onClose();
     }
 
-    function handleInputChange(e) {
-        // console.log(e.target.value);
-        setFileContent(e.target.value);
-    }
+    // const [isLoading, setIsLoading] = useState(false);
 
-    useEffect(() => {
-        setTimeout(() => {
-            editFileContents(id, fileContent).then(() => console.log('data auto saved'));
-            setShowAutoSaveMessage(true);
-            setTimeout(() => { setShowAutoSaveMessage(false);}, 2000); 
-        }, 5000);
-    }, [fileContent]);
+    const handleFileContentChange = debounce(async (fileContent) => {
+        setIsLoading(true);
+        try {
+            await editFileContents(id, fileContent);
+        } catch (error) {
+            console.error(error);
+        }
+        setIsLoading(false);
+    }, 1000);
 
     return (
         <Modal
             show={show}
             onHide={onClose}
             keyboard={false}
-            className="editfile-modal"
+            className={styles.editfileModal}
             style={{ border: "none" }}
         >
-            <div className="modal-contents">
-                <div className="file-heading">
-                    <span className="file-heading">Edit File</span>
-                    <label>{file.name}</label>
+            <div className={styles.modalContents}>
+                <div className={styles.fileHeading}>
+                    <span className={styles.fileHeading}>
+                        Edit File &nbsp; -&gt; {file.name}
+                    </span>
+                    {/* &nbsp; -&gt; {file.name} */}
                 </div>
-                {showAutoSaveMessage  && (<div>...Auto saving</div>)}
-                <textarea 
-                    className="edit-file-input"
+                <div className={styles.autosaveBox}>
+                    {showAutoSaveMessage && <div>...Auto saving</div>}
+                </div>
+                <TextBox
+                    fileContent={fileContent}
+                    onFileContentChange={handleFileContentChange}
+                />
+                {/* <textarea
+                    className={styles.editfileInput}
                     name="filename"
                     placeholder="Type Anything here.."
-                    defaultValue={file.contents}
-                    onChange={handleInputChange}>
-                </textarea>
-                
-                {error && (
-                    <label style={{ color: "red" }}>
-                        Please enter some text
-                    </label>
-                )}
-                <button onClick={saveFile} className="create-file-button">
+                    value={fileContent}
+                    onChange={handleChange}
+                ></textarea> */}
+                <button onClick={saveFile} className={styles.createfileButton}>
                     Save File
                 </button>
+                {fileContent}
             </div>
         </Modal>
     );
