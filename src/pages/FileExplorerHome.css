@@ -307,6 +307,12 @@ hr {
     background: #ebf0f5;
 }
 
+.breadcrumbs {
+    display: flex;
+    align-items: flex-start;
+    padding-left: 30px;
+}
+
 .file-section-container {
     position: absolute;
     margin: 20px;

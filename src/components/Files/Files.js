@@ -4,7 +4,7 @@ import { getFiles } from "../../api/FileOperations.js";
 import EditFileModal from "../EditFileModal/EditFileModal.js";
 import styles from "./Files.module.css";
 
-function Files({ filesList, updateCounter }) {
+function Files({ filesList, updateCounter, handleFileUpdate }) {
     const [showEditFileModal, setShowEditFileModal] = useState(false);
 
     const [fileId, setFileId] = useState("");
@@ -46,6 +46,7 @@ function Files({ filesList, updateCounter }) {
                         file={file}
                         show={showEditFileModal}
                         onClose={() => setShowEditFileModal(false)}
+                        handleFileUpdate={handleFileUpdate}
                     />
                 )}
             </>

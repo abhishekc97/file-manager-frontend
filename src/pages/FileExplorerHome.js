@@ -57,28 +57,6 @@ function FileExplorerHome() {
         findPinStatus();
     }, []);
 
-    // async function getAllFiles() {
-    //     let currentFolder = "folder1";
-    //     const results = await getFiles(currentFolder);
-    //     setFilesList(results);
-    // }
-
-    // const [refreshNewFiles, setRefreshNewFiles] = useState(false);
-
-    // async function findRefreshStatus() {
-    //     let fileAdded = localStorage.getItem("File_Added");
-
-    //     if (fileAdded === "true") {
-    //         setRefreshNewFiles(true);
-    //     } else if (fileAdded === "true") {
-    //         setRefreshNewFiles(false);
-    //     }
-    // }
-
-    // useEffect(() => {
-    //     findRefreshStatus();
-    // }, []);
-
     /** List all files */
     const navigate = useNavigate();
     // useparams for getting current folder
@@ -119,6 +97,12 @@ function FileExplorerHome() {
         // setFilesList(results.data);
 
         setUpdateCounter(updateCounter + 1);
+    }
+
+    async function handleFileUpdate() {
+        // Re-fetch data from the API and update the state
+        getAllFiles();
+        console.log("inside handle file update");
     }
 
     /** Search functions */
@@ -273,6 +257,7 @@ function FileExplorerHome() {
                                 file={file}
                                 show={showEditFileModal}
                                 onClose={() => setShowEditFileModal(false)}
+                                onFileUpdate={handleFileUpdate}
                             />
                         )}
                     </div>
@@ -305,11 +290,15 @@ function FileExplorerHome() {
                         <span className="logout-icon"></span>
                     </button>
                 </div>
+                <div className="breadcrumbs">
+                    {`${folderName} /`}
+                </div>
                 <hr />
                 <div className="file-section-container">
                     <Files
                         filesList={filesList}
                         updateCounter={updateCounter}
+                        handleFileUpdate={handleFileUpdate}
                     />
                 </div>
             </div>
