@@ -10,15 +10,19 @@ function Files({ filesList, updateCounter }) {
     const [fileId, setFileId] = useState("");
     const [file, setFile] = useState();
 
-    function openEditFileModal(file_id, file) {
-        setShowEditFileModal(true);
+    function openEditFileModal(file_id, fileObj) {
+        // e.preventDefault(); // is not a function error
+        console.log('file_id, file', file_id, fileObj);
         setFileId(file_id);
-        setFile(file);
+        setFile(fileObj);
+        setShowEditFileModal(true);
+        
     }
 
     useEffect(() => {
         // Re-render the component whenever the data or updateCounter changes
-      }, [filesList, updateCounter]);
+        console.log('fileId, file', fileId, file);
+      }, [fileId, file, filesList, updateCounter]);
 
     return (
         <div className={styles.fileContainer}>

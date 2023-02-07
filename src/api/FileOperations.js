@@ -62,17 +62,17 @@ export async function createNewFile(name, folder) {
 // POST Request
 export async function editFileContents(id, contents) {
     try {
-        console.log(contents);
+        console.log("id, contents", id, contents);
         const reqUrl = `${process.env.REACT_APP_BACKEND_URL}/api/operations/editFileContent`;
         const response = await axios.post(reqUrl, {
             id: id,
             contents: contents,
         });
 
-        if (response) {
-            // console.log(response);
-            return response;
-        }
+        // if (response) {
+        //     // console.log(response);
+        //     return response;
+        // }
     } catch (error) {
         console.log(error);
     }
@@ -101,7 +101,7 @@ export async function getFile(id) {
         const response = await axios.get(reqUrl);
 
         if (response) {
-            console.log(response);
+            // console.log(response);
             return response.data;
         }
     } catch (error) {

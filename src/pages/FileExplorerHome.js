@@ -158,9 +158,11 @@ function FileExplorerHome() {
     const [file, setFile] = useState();
 
     function openEditFileModal(file_id, file) {
-        setShowEditFileModal(true);
+        console.log('file_id, file', file_id, file);
         setFileId(file_id);
         setFile(file);
+        setShowEditFileModal(true);
+        console.log('fileId, file', fileId, file);
     }
 
     return (
