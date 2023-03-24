@@ -1,28 +1,21 @@
 import React, { useEffect, useState } from "react";
-import { useParams, useNavigate } from "react-router-dom";
-import { getFiles } from "../../api/FileOperations.js";
 import EditFileModal from "../EditFileModal/EditFileModal.js";
 import styles from "./Files.module.css";
 
-function Files({ filesList, updateCounter, handleFileUpdate }) {
+function Files({ filesList, handleFileUpdate }) {
     const [showEditFileModal, setShowEditFileModal] = useState(false);
 
     const [fileId, setFileId] = useState("");
     const [file, setFile] = useState();
 
     function openEditFileModal(file_id, fileObj) {
-        // e.preventDefault(); // is not a function error
-        console.log('file_id, file', file_id, fileObj);
         setFileId(file_id);
         setFile(fileObj);
         setShowEditFileModal(true);
-        
     }
 
-    useEffect(() => {
-        // Re-render the component whenever the data or updateCounter changes
-        console.log('fileId, file', fileId, file);
-      }, [fileId, file, filesList, updateCounter]);
+    // Re-render the component whenever the data changes
+    useEffect(() => {}, [fileId, file, filesList]);
 
     return (
         <div className={styles.fileContainer}>
@@ -31,7 +24,7 @@ function Files({ filesList, updateCounter, handleFileUpdate }) {
                     <div className={styles.fileBox} key={index}>
                         <button
                             className={styles.fileButton}
-                            onClick={() => {
+                            onDoubleClick={() => {
                                 openEditFileModal(file._id, file);
                             }}
                         >

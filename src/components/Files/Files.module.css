@@ -1,9 +1,8 @@
 .fileContainer {
-    display: grid;
-    flex-direction: row;
-    align-items: center;
-    grid-template-columns: repeat(7,1fr);
-    grid-gap: 10px;
+    display: flex;
+    /* grid-template-columns: repeat(7,1fr); */
+    flex-wrap: wrap;
+    grid-gap: 5px;
 }
 
 .fileBox {
@@ -26,7 +25,7 @@
     height: 96px;
     width: 70px;
     display: block;
-    
+
     background: url("../../../public/images/regular-file.png") no-repeat;
     background-size: 100%;
     background-position: center; /* center the image within the button */

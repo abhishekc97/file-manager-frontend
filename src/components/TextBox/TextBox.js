@@ -1,16 +1,12 @@
-import React, { useState, useRef, useEffect } from "react";
-import JoditEditor from "jodit-react";
+import React, { useState, useEffect } from "react";
 
 function TextBox({ fileContent, onFileContentChange }) {
     const [value, setValue] = useState(fileContent);
-    
+
     useEffect(() => {
         console.log(value);
         console.log(fileContent);
-
     }, [fileContent]);
-    // const editor = useRef(null);
-    // const config = ["bold", "italic", "underline"];
 
     const handleChange = (event) => {
         const { value: nextValue } = event.target;
@@ -27,12 +23,6 @@ function TextBox({ fileContent, onFileContentChange }) {
             value={fileContent}
             onChange={handleChange}
         ></textarea>
-        // <JoditEditor
-        //     ref={editor}
-        //     value={value}
-        //     config={config}
-        //     onChange={handleChange}
-        // />
     );
 }
 
