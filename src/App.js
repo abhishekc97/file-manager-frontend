@@ -1,29 +1,19 @@
 import "./App.css";
 import FileExplorerHome from "./pages/FileExplorerHome";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Files from "./components/Files/Files";
 
 function App() {
     return (
         <BrowserRouter>
-            <Routes>
-                <Route
-                    path="/"
-                    element={
-                        <div className="App">
-                            <FileExplorerHome />
-                        </div>
-                    }
-                ></Route>
-				<Route
-                    path="/:folderName"
-                    element={
-                        <div className="App">
-                            <FileExplorerHome />
-                        </div>
-                    }
-                ></Route>
-            </Routes>
+            <div className="App">
+                <Routes>
+                    <Route path="/" element={<FileExplorerHome />}></Route>
+                    <Route
+                        path="/:folderName"
+                        element={<FileExplorerHome />}
+                    ></Route>
+                </Routes>
+            </div>
         </BrowserRouter>
     );
 }
