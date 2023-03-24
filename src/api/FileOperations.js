@@ -92,7 +92,7 @@ export async function getFile(id) {
 // get list of all files from files collection
 export async function getAllFilesFromCollection() {
     try {
-        const reqUrl = `${process.env.REACT_APP_BACKEND_URL}/api/operations/getAllFiles`;
+        const reqUrl = `${process.env.REACT_APP_BACKEND_URL}/api/operations/files`;
         const response = await axios.get(reqUrl);
         if (response) {
             return response.data;
