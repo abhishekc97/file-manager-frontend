@@ -4,27 +4,30 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-
     width: 399.83px;
     height: 305.56px;
-    left: 520px;
-    top: 297px;
-
+    top: 20%;
+    left: 30%;
     background: #ffffff;
     border: 1px solid #c8d6e5;
     border-radius: 10px;
 }
 
-.modalContents {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-
-    height: 220px;
-    width: 350px;
-    border: none;
+.myModalDialog {
+    height: 100%;
+    width: 90%;
     margin: auto;
     padding: 15px;
+}
+
+.myModalContent {
+    display: flex;
+    align-items: center;
+    border: none;
+    height: 100%;
+    width: 100%;
+    border: none;
+    margin: auto;
 }
 
 .fileHeading {
@@ -53,7 +56,7 @@
     color: #566474;
 }
 
-input {
+.fileNameInput {
     margin-top: 10px;
 }
 
@@ -72,4 +75,8 @@ input {
     color: #fff;
     background: #142683;
     border-radius: 5px;
+}
+
+.errorMsg {
+    color: red;
 }

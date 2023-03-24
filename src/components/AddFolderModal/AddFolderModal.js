@@ -1,8 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import Modal from "react-bootstrap/Modal";
 import { createNewFolder } from "../../api/FileOperations";
 import { useNavigate } from "react-router-dom";
-
 import styles from "./AddFolderModal.module.css";
 
 function AddFolderModal({ show, onClose }) {
@@ -17,8 +16,6 @@ function AddFolderModal({ show, onClose }) {
         } else {
             createNewFolder(folderName)
                 .then((response) => {
-                    console.log(response);
-                    console.log("New Folder made");
                     navigate(`/${folderName}`);
                 })
                 .catch((err) => {
@@ -34,26 +31,30 @@ function AddFolderModal({ show, onClose }) {
             onHide={onClose}
             keyboard={false}
             className={styles.addfolderModal}
+            dialogClassName={styles.myModalDialog}
+            contentClassName={styles.myModalContent}
         >
-            <div className={styles.modalContents}>
-                <div className={styles.folderHeading}>Create Folder</div>
-                <label htmlFor="">Enter folder name</label>
-                <input
-                    type="text"
-                    name="foldername"
-                    onChange={(e) => {
-                        setFolderName(e.target.value);
-                    }}
-                ></input>
-                {error && (
-                    <label style={{ color: "red" }}>
-                        Please enter a folder name
-                    </label>
-                )}
-                <button onClick={createFolder} className={styles.createFolderButton}>
-                    Create now
-                </button>
-            </div>
+            <div className={styles.folderHeading}>Create Folder</div>
+            <span>Enter folder name</span>
+            <input
+                type="text"
+                className={styles.folderNameInput}
+                name="foldername"
+                onChange={(e) => {
+                    setFolderName(e.target.value);
+                }}
+            ></input>
+            {error && (
+                <span className={styles.errorMsg}>
+                    Please enter a folder name
+                </span>
+            )}
+            <button
+                onClick={createFolder}
+                className={styles.createFolderButton}
+            >
+                Create now
+            </button>
         </Modal>
     );
 }
