@@ -1,29 +1,29 @@
-.lockpinModal {
+.lockPinModal {
     position: absolute;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-
     width: 399.83px;
     height: 305.56px;
-    left: 520px;
-    top: 297px;
+    left: 40%;
+    top: 25%;
     border-radius: 10px;
     border: none;
     background: white;
 }
 
-.modalContents {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-
-    height: 220px;
-    width: 350px;
-    border: none;
+.myModalDialog {
+    height: 100%;
+    width: 90%;
     margin: auto;
     padding: 15px;
+}
+
+.myModalContent {
+    display: flex;
+    align-items: center;
+    border: none;
+    height: 100%;
+    width: 100%;
+    border: none;
+    margin: auto;
 }
 
 .pinHeading {
@@ -57,20 +57,7 @@
     border-radius: 5px;
 }
 
-.pincode-input-container .pincode-input-text {
-    padding: 0 !important;
-    margin: 0 40px;
+.errorMsg {
+    color: red;
     text-align: center;
-    background: transparent;
-    width: 50px;
-    height: 50px;
-    border: 2px solid;
-    border-radius: 5px;
-    border-color: #EBF0F5;
-}
-.pincode-input-container .pincode-input-text:focus {
-    outline: none;
-    box-shadow: none;
-    border: 2px solid;
-    border-color: red;
 }

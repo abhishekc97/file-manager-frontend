@@ -1,20 +1,15 @@
 import React, { useEffect, useState } from "react";
-import { createPortal } from "react-dom";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import LockModal from "../components/LockFolderModal/LockModal.js";
 import SetPinModal from "../components/SetPinModal/SetPinModal.js";
 import AddFileModal from "../components/AddFileModal/AddFileModal.js";
 import AddFolderModal from "../components/AddFolderModal/AddFolderModal.js";
 import EditFileModal from "../components/EditFileModal/EditFileModal.js";
-import { getStatus } from "../api/PinVerification.js";
-import {
-    getFiles,
-    getAllFolders,
-    getAllFilesFromCollection,
-} from "../api/FileOperations";
-import "./FileExplorerHome.css";
 import Files from "../components/Files/Files.js";
 import Folders from "../components/Folders/Folders.js";
+import { getStatus } from "../api/PinVerification.js";
+import { getFiles, getAllFilesFromCollection } from "../api/FileOperations";
+import "./FileExplorerHome.css";
 
 function FileExplorerHome() {
     const [showLockModal, setShowLockModal] = useState(false);
@@ -23,20 +18,15 @@ function FileExplorerHome() {
     const [showCreateFileModal, setShowCreateFileModal] = useState(false);
     const [showCreateFolderModal, setShowCreateFolderModal] = useState(false);
     const [showEditFileModal, setShowEditFileModal] = useState(false);
-    // const [searchText, setSearchText] = useState("");
 
-    // console.log(showCreateFileModal, showCreateFolderModal, showEditFileModal);
-
+    /** Locking functionality */
     useEffect(() => {
         let lockIsOpen = localStorage.getItem("Lock_Is_On");
 
-        // console.log(lockIsOpen);
         if (lockIsOpen === "true") {
             setShowLockModal(true);
-            // console.log(typeof lockIsOpen);
         } else if (lockIsOpen === "false") {
             setShowLockModal(false);
-            // console.log(typeof lockIsOpen);
         }
     }, []);
 
@@ -44,11 +34,9 @@ function FileExplorerHome() {
         const response = await getStatus();
 
         if (!response) {
-            // console.log("no response");
             setShowSetPinModal(true);
             localStorage.setItem("Pin_exists", "false");
         } else {
-            // console.log(response.data);
             localStorage.setItem("Pin_exists", "true");
         }
     }
@@ -57,102 +45,60 @@ function FileExplorerHome() {
         findPinStatus();
     }, []);
 
-    /** List all files */
-    const navigate = useNavigate();
-    // useparams for getting current folder
-    let { folderName } = useParams();
+    /** Listing folders and files */
+    let { folderName } = useParams(); // useparams for getting current folder
 
-    const [filesList, setFilesList] = useState([
-        { name: "" },
-        { name: "file 2" },
-    ]);
+    // set files of the selected folder
+    const [filesList, setFilesList] = useState([]);
 
     async function getAllFiles() {
-        // console.log(folderName);
         const results = await getFiles(folderName);
-        // console.log(results);
         setFilesList(results.data);
-
-        if (results) {
-            if (!folderName) {
-                const defaultFile = filesList[0];
-                const defaultFileName = defaultFile.name;
-                console.log(defaultFileName);
-                navigate(`/${folderName}`); // navigate(`/${folderName}/:${defaultFileName}`);
-            }
-        }
     }
     useEffect(() => {
         getAllFiles();
     }, [folderName]);
 
-    const [updateCounter, setUpdateCounter] = useState(0);
-
-    async function handleFileAdded() {
-        // Re-fetch data from the API and update the state
+    // Re-fetch all files and update the state when a new file is added or a file is updated
+    function handleAddNewFileAndUpdateFile() {
         getAllFiles();
-        console.log("inside handlefileadded");
-        // const results = await getFiles(folderName);
-        // console.log(results);
-        // setFilesList(results.data);
-
-        setUpdateCounter(updateCounter + 1);
     }
 
-    async function handleFileUpdate() {
-        // Re-fetch data from the API and update the state
-        getAllFiles();
-        console.log("inside handle file update");
-    }
-
-    /** Search functions */
+    /** Search functionality */
     const [value, setValue] = useState("");
-
     const [files, setFiles] = useState([]);
-
-    const [dropdownIsActive, setActive] = useState("false");
-    const toggleClass = () => {
-        setActive(!dropdownIsActive);
-    };
+    const [isDropdownActive, setIsDropdownActive] = useState(false);
 
     async function fetchAllFiles() {
         const results = await getAllFilesFromCollection();
         setFiles(results);
-        // console.log(results);
     }
     useEffect(() => {
         fetchAllFiles();
-    },[showEditFileModal]);
+    }, [showEditFileModal]);
 
     const onChange = (event) => {
-        toggleClass();
         setValue(event.target.value);
     };
 
     const onSearch = (searchTerm) => {
         setValue(searchTerm);
-        // our api to fetch the search result
-        console.log("search ", searchTerm);
-        toggleClass();
         openEditFileModal();
     };
 
-    
     const [fileId, setFileId] = useState("");
     const [file, setFile] = useState();
 
     function openEditFileModal(file_id, file) {
-        console.log('file_id, file', file_id, file);
         setFileId(file_id);
         setFile(file);
         setShowEditFileModal(true);
-        console.log('fileId, file', fileId, file);
     }
 
     return (
         <div className="file-explorer-home-container">
             <div className="sidebar">
-                <div className="app-logo"></div>
+                <img src="images/logo.png" alt="" className="app-logo" />
                 <div className="add-buttons-wrapper">
                     <button
                         className="add-file"
@@ -165,7 +111,7 @@ function FileExplorerHome() {
                         <AddFileModal
                             show={showCreateFileModal}
                             onClose={() => setShowCreateFileModal(false)}
-                            onFileAdded={handleFileAdded}
+                            onFileAdded={handleAddNewFileAndUpdateFile}
                         />
                     )}
                     <button
@@ -214,11 +160,14 @@ function FileExplorerHome() {
                                 value={value}
                                 onChange={onChange}
                                 className="search-input-box"
+                                placeholder="Search for any file"
+                                onClick={() => setIsDropdownActive(true)}
+                                onBlur={() => setIsDropdownActive(false)}
                             />
                         </div>
                         <div
                             className={
-                                dropdownIsActive ? "dropdown" : "dropdown-empty"
+                                isDropdownActive ? "dropdown" : "dropdown-empty"
                             }
                         >
                             {files
@@ -247,7 +196,9 @@ function FileExplorerHome() {
                                         key={file._id}
                                     >
                                         <div className="dropdown-row-icon"></div>
-                                        {file.name}
+                                        <div className="dropdownText">
+                                            {file.name}
+                                        </div>
                                     </div>
                                 ))}
                         </div>
@@ -257,32 +208,22 @@ function FileExplorerHome() {
                                 file={file}
                                 show={showEditFileModal}
                                 onClose={() => setShowEditFileModal(false)}
-                                onFileUpdate={handleFileUpdate}
+                                onFileUpdate={handleAddNewFileAndUpdateFile}
                             />
                         )}
                     </div>
-
-                    {/* <div className="search-bar">
-                        <input
-                            className="search-box"
-                            type="text"
-                            placeholder="search bar"
-                        />
-                    </div> */}
                     <button
                         className="settings-button"
                         onClick={() => setShowSetPinModal(true)}
                     >
                         <span className="settings-icon"></span>
                     </button>
-                    {showSetPinModal &&
-                        createPortal(
-                            <SetPinModal
-                                show={showSetPinModal}
-                                onClose={() => setShowSetPinModal(false)}
-                            />,
-                            document.body
-                        )}
+                    {showSetPinModal && (
+                        <SetPinModal
+                            show={showSetPinModal}
+                            onClose={() => setShowSetPinModal(false)}
+                        />
+                    )}
                     <button
                         className="logout-button"
                         onClick={() => setShowLockModal(true)}
@@ -290,15 +231,12 @@ function FileExplorerHome() {
                         <span className="logout-icon"></span>
                     </button>
                 </div>
-                <div className="breadcrumbs">
-                    {`${folderName} /`}
-                </div>
+                <div className="breadcrumbs">{`${folderName} /`}</div>
                 <hr />
                 <div className="file-section-container">
                     <Files
                         filesList={filesList}
-                        updateCounter={updateCounter}
-                        handleFileUpdate={handleFileUpdate}
+                        handleFileUpdate={handleAddNewFileAndUpdateFile}
                     />
                 </div>
             </div>
