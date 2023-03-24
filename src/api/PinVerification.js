@@ -3,7 +3,7 @@ import axios from "axios";
 // api to check whether pin exists or not
 export async function getStatus() {
     try {
-        const reqUrl = `${process.env.REACT_APP_BACKEND_URL}/api/admin/pinStatus`;
+        const reqUrl = `${process.env.REACT_APP_BACKEND_URL}/api/admin/pin-status`;
         const response = await axios.get(reqUrl);
 
         if (response) {
@@ -17,7 +17,7 @@ export async function getStatus() {
 // POST api to create pin
 export async function createPin(pin) {
     try {
-        const reqUrl = `${process.env.REACT_APP_BACKEND_URL}/api/admin/createPin`;
+        const reqUrl = `${process.env.REACT_APP_BACKEND_URL}/api/admin/create-pin`;
         const response = await axios.post(reqUrl, { pin: pin });
         if (response) {
             return response;
@@ -30,7 +30,7 @@ export async function createPin(pin) {
 // api to verify the entered pin
 export async function verifyPin(pin) {
     try {
-        const reqUrl = `${process.env.REACT_APP_BACKEND_URL}/api/admin/verifyPin`;
+        const reqUrl = `${process.env.REACT_APP_BACKEND_URL}/api/admin/verify-pin`;
         const response = await axios.post(reqUrl, { pin: pin });
 
         if (response) {
@@ -44,7 +44,7 @@ export async function verifyPin(pin) {
 // api to update an existing pin
 export async function updateExistingPin(pin) {
     try {
-        const reqUrl = `${process.env.REACT_APP_BACKEND_URL}/api/admin/changePin`;
+        const reqUrl = `${process.env.REACT_APP_BACKEND_URL}/api/admin/change-pin`;
         const response = await axios.post(reqUrl, { pin: pin });
 
         if (response) {

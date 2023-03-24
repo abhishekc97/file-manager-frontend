@@ -3,7 +3,7 @@ import axios from "axios";
 // api to make a new folder
 export async function createNewFolder(name) {
     try {
-        const reqUrl = `${process.env.REACT_APP_BACKEND_URL}/api/operations/newFolder`;
+        const reqUrl = `${process.env.REACT_APP_BACKEND_URL}/api/operations/new-folder`;
         const response = await axios.post(reqUrl, { name: name });
 
         if (response) {
@@ -17,7 +17,7 @@ export async function createNewFolder(name) {
 // api to get all folders
 export async function getAllFolders() {
     try {
-        const reqUrl = `${process.env.REACT_APP_BACKEND_URL}/api/operations/getFolders`;
+        const reqUrl = `${process.env.REACT_APP_BACKEND_URL}/api/operations/folders`;
         const response = await axios.get(reqUrl);
 
         if (response) {
@@ -31,7 +31,7 @@ export async function getAllFolders() {
 /** api to make a new file */
 export async function createNewFile(name, folder) {
     try {
-        const reqUrl = `${process.env.REACT_APP_BACKEND_URL}/api/operations/newFile`;
+        const reqUrl = `${process.env.REACT_APP_BACKEND_URL}/api/operations/new-file`;
         const response = await axios.post(reqUrl, {
             name: name,
             folder: folder,
@@ -48,7 +48,7 @@ export async function createNewFile(name, folder) {
 // api to edit contents in a file; POST Request
 export async function editFileContents(id, contents) {
     try {
-        const reqUrl = `${process.env.REACT_APP_BACKEND_URL}/api/operations/editFileContent`;
+        const reqUrl = `${process.env.REACT_APP_BACKEND_URL}/api/operations/edit-file`;
         const response = await axios.post(reqUrl, {
             id: id,
             contents: contents,
@@ -64,7 +64,7 @@ export async function editFileContents(id, contents) {
 // get all files belonging to a folder
 export async function getFiles(folder) {
     try {
-        const reqUrl = `${process.env.REACT_APP_BACKEND_URL}/api/operations/getFiles/${folder}`;
+        const reqUrl = `${process.env.REACT_APP_BACKEND_URL}/api/operations/folder/${folder}/files`;
         const response = await axios.get(reqUrl);
 
         if (response) {
@@ -78,7 +78,7 @@ export async function getFiles(folder) {
 // get a particular file using its id
 export async function getFile(id) {
     try {
-        const reqUrl = `${process.env.REACT_APP_BACKEND_URL}/api/operations/getFile/${id}`;
+        const reqUrl = `${process.env.REACT_APP_BACKEND_URL}/api/operations/file/${id}`;
         const response = await axios.get(reqUrl);
 
         if (response) {
